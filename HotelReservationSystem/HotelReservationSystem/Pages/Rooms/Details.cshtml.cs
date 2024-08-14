@@ -1,9 +1,7 @@
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using HotelReservationSystem.Data;
 using HotelReservationSystem.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace HotelReservationSystem.Pages.Rooms
 {
@@ -19,10 +17,38 @@ namespace HotelReservationSystem.Pages.Rooms
         public Room Room { get; set; }
         public IList<Review> Reviews { get; set; }
 
-        public async Task OnGetAsync(int id)
+        [BindProperty]
+        public Review Review { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Room = await _context.Rooms.FirstOrDefaultAsync(m => m.RoomId == id);
-            Reviews = await _context.Reviews.Where(r => r.RoomId == id).ToListAsync();
+            Room = await _context.Rooms.FindAsync(id);
+            Reviews = await _context.Reviews
+                                    .Include(r => r.User)
+                                    .Where(r => r.RoomId == id)
+                                    .ToListAsync();
+
+            if (Room == null)
+            {
+                return NotFound();
+            }
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            Review.ReviewDate = DateTime.Now;
+            Review.UserId = 1;
+            _context.Reviews.Add(Review);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage(new { id = Review.RoomId });
         }
     }
 }

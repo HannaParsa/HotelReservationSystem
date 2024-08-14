@@ -1,29 +1,21 @@
-using HotelReservationSystem.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using HotelReservationSystem.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddRazorPages();
 
-// Add EF Core with SQL Server
+// Add DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add ASP.NET Core Identity
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
-{
-    // Configure identity options here if needed
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 6;
-})
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-// Add Razor Pages services
-builder.Services.AddRazorPages();
+// Add Identity services with default IdentityUser and IdentityRole
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
@@ -39,9 +31,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// Add authentication middleware
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapRazorPages();

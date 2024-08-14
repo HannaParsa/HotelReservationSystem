@@ -1,42 +1,54 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+using HotelReservationSystem.Models;
 using System.Threading.Tasks;
 
 namespace HotelReservationSystem.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager)
+        public LoginModel(SignInManager<User> signInManager, UserManager<User> userManager, ApplicationDbContext context)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
+            _context = context;
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-        }
+        public LoginViewModel Input { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, isPersistent: false, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByNameAsync(Input.UserName);
+
+                    if (user == null)
+                    {
+                        user = new User
+                        {
+                            Username = Input.UserName,
+                            Email = Input.Email,
+                            Role = "Guest" // Or other role logic
+                        };
+
+                        var createResult = await _userManager.CreateAsync(user, Input.Password);
+
+                        if (createResult.Succeeded)
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                        }
+                    }
+
                     return RedirectToPage("/Rooms/Index");
                 }
                 else
@@ -47,5 +59,13 @@ namespace HotelReservationSystem.Pages.Account
 
             return Page();
         }
+    }
+
+    public class LoginViewModel
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public bool RememberMe { get; set; }
+        public string Email { get; set; }
     }
 }

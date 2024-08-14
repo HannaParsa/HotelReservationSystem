@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using HotelReservationSystem.Data;
 using HotelReservationSystem.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace HotelReservationSystem.Pages.Rooms
 {

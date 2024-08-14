@@ -1,6 +1,8 @@
-﻿namespace HotelReservationSystem.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace HotelReservationSystem.Models
 {
-    public class User
+    public class User: IdentityUser
     {
         public int UserId { get; set; }
         public string Username { get; set; }

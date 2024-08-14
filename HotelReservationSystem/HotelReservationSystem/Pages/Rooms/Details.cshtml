@@ -1,19 +1,44 @@
-﻿@page
+﻿@page "{id:int}"
 @model HotelReservationSystem.Pages.Rooms.DetailsModel
-
 @{
     ViewData["Title"] = "Room Details";
 }
 
-<h2>@Model.Room.RoomNumber</h2>
+<h2>Room Details</h2>
 
-<p>@Model.Room.Description</p>
-<p>Price: @Model.Room.Price</p>
+<div>
+    <h3>@Model.Room.RoomNumber</h3>
+    <img src="@Model.Room.ImageURL" alt="Room Image" />
+    <p>@Model.Room.Description</p>
+    <p>Price: @Model.Room.Price</p>
+    <p>Availability: @(Model.Room.IsAvailable ? "Available" : "Not Available")</p>
+</div>
 
 <h3>Reviews</h3>
-<ul>
-    @foreach (var review in Model.Reviews)
-    {
-        <li>@review.Comment</li>
-    }
-</ul>
+@if (Model.Reviews.Any())
+{
+    <ul>
+        @foreach (var review in Model.Reviews)
+        {
+            <li>@review.User.Username: @review.Comment (@review.Rating stars)</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No reviews yet.</p>
+}
+
+<h4>Add a Review</h4>
+<form method="post">
+    <input type="hidden" asp-for="Review.RoomId" />
+    <div>
+        <label asp-for="Review.Rating"></label>
+        <input asp-for="Review.Rating" />
+    </div>
+    <div>
+        <label asp-for="Review.Comment"></label>
+        <textarea asp-for="Review.Comment"></textarea>
+    </div>
+    <button type="submit">Submit</button>
+</form>
