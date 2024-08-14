@@ -94,7 +94,6 @@ D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
-D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\HotelReservationSystem.csproj.AssemblyReference.cache
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\HotelReservationSystem.GeneratedMSBuildEditorConfig.editorconfig
@@ -119,3 +118,4 @@ D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\HotelReservationSystem.MvcApplicationPartsAssemblyInfo.cs
+D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
