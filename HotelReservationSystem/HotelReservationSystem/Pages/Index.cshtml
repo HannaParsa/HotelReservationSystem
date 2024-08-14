@@ -5,38 +5,59 @@
     ViewData["Title"] = "Home";
 }
 
-<h2>Available Rooms</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <h1>Hotel Reservation System</h1>
+    </header>
 
-@if (Model.Rooms != null && Model.Rooms.Any())
-{
-    <div class="room-list">
-        @foreach (var room in Model.Rooms)
+    <main role="main" class="container">
+        <h2>Available Rooms</h2>
+
+        @if (!User.Identity.IsAuthenticated)
         {
-            <div class="room-item">
-                <!-- Display the room number -->
-                <h3>@room.RoomNumber</h3>
-                
-                <!-- Display the room image -->
-                <img src="@room.ImageURL" alt="Image of @room.RoomNumber" style="width:200px;height:150px;object-fit:cover;" />
+            <p class="alert alert-info">Please <a asp-page="/Account/Login">login</a> to view more details.</p>
+        }
 
-                <!-- Display the room description -->
-                <p>@room.Description</p>
-                
-                <!-- Display the room price -->
-                <p>Price: $@room.Price</p>
-                
-                <!-- Optionally, display availability status -->
-                <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
+        @if (Model.Rooms != null && Model.Rooms.Any())
+        {
+            <div class="room-list">
+                @foreach (var room in Model.Rooms)
+                {
+                    <div class="room-item">
+                        <!-- Display the room number -->
+                        <h3>@room.RoomNumber</h3>
+
+                        <!-- Display the room image -->
+                        <img src="@room.ImageURL" alt="Image of @room.RoomNumber" class="room-image" />
+
+                        <!-- Display the room description -->
+                        <p>@room.Description</p>
+
+                        <!-- Display the room price -->
+                        <p class="room-price">Price: $@room.Price</p>
+
+                        <!-- Optionally, display availability status -->
+                        <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
+                    </div>
+                }
             </div>
         }
-    </div>
-}
-else
-{
-    <p>No rooms available at the moment.</p>
-}
+        else
+        {
+            <p>No rooms available at the moment.</p>
+        }
+    </main>
 
-@if (!User.Identity.IsAuthenticated)
-{
-    <p>Please <a asp-page="/Account/Login">login</a> to view more details.</p>
-}
+    <footer>
+        <p>&copy; 2024 Hotel Reservation System</p>
+    </footer>
+</body>
+</html>

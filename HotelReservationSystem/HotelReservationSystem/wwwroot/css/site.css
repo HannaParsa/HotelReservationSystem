@@ -17,7 +17,86 @@ body {
   margin-bottom: 60px;
 }
 
-.form-control {
+/* Define color variables */
+:root {
+    --primary-color: #6c757d; /* Gray */
+    --secondary-color: #6c757d; /* Dark Gray */
+    --text-color: #000000; /* Dark Gray for text */
+    --button-background: #343a40; /* Dark Gray button */
+    --button-text: #ffffff; /* White text on buttons */
+}
+
+/* Apply background and text color to the body */
+body {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--secondary-color);
+    color: var(--button-text); /* White text in the header */
+    padding: 10px 20px;
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+}
+
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #ffffff; /* White background for content area */
+    border-radius: 8px;
+}
+
+.alert.alert-info {
+    background-color: #e9ecef; /* Light gray background */
+    color: var(--text-color); /* Dark gray text */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.room-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.room-item {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1 1 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .room-item h3 {
+        margin-top: 0;
+        color: var(--text-color);
+    }
+
+.room-image {
     width: 100%;
-    margin-bottom: 10px; 
+    height: auto;
+    border-radius: 5px;
+}
+
+.room-price {
+    font-weight: bold;
+}
+
+footer {
+    background-color: var(--secondary-color);
+    color: var(--button-text); /* White text in the footer */
+    text-align: center;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
