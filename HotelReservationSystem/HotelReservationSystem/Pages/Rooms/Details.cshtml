@@ -1,0 +1,19 @@
+﻿@page
+@model HotelReservationSystem.Pages.Rooms.DetailsModel
+
+@{
+    ViewData["Title"] = "Room Details";
+}
+
+<h2>@Model.Room.RoomNumber</h2>
+
+<p>@Model.Room.Description</p>
+<p>Price: @Model.Room.Price</p>
+
+<h3>Reviews</h3>
+<ul>
+    @foreach (var review in Model.Reviews)
+    {
+        <li>@review.Comment</li>
+    }
+</ul>

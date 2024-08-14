@@ -1,0 +1,40 @@
+﻿@page
+@model HotelReservationSystem.Pages.Rooms.IndexModel
+
+@{
+    ViewData["Title"] = "Rooms";
+}
+
+<h2>Rooms</h2>
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <partial name="_LoginPartial" />
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Room Name</th>
+            <th>Short Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model.Rooms)
+        {
+            <tr>
+                <td>@room.RoomNumber</td>
+                <td>@room.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a class="btn btn-primary" asp-page="./Details">View Room Details</a>
+}
+else
+{
+    <p>Please log in to view room details.</p>
+}
