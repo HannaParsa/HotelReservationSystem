@@ -7,17 +7,21 @@
 <h2>Register</h2>
 
 <form method="post">
-    <div>
-        <label>Username</label>
-        <input asp-for="User.Username" />
+    <div class="row">
+        <div class="col-md-3">
+            <label asp-for="User.Username">Username</label>
+            <input asp-for="User.Username" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="User.Password">Password</label>
+            <input asp-for="User.Password" type="password" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="User.Email">Email</label>
+            <input asp-for="User.Email" class="form-control" />
+        </div>
+        <div class="col-md-3" style="margin-top: 25px;">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
     </div>
-    <div>
-        <label>Password</label>
-        <input asp-for="User.Password" type="password" />
-    </div>
-    <div>
-        <label>Email</label>
-        <input asp-for="User.Email" />
-    </div>
-    <button type="submit">Register</button>
 </form>
