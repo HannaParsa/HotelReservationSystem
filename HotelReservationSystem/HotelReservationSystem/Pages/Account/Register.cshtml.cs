@@ -25,9 +25,12 @@ public class RegisterModel : PageModel
             return Page();
         }
 
+        // Add the new user to the database
         _context.Users.Add(User);
         await _context.SaveChangesAsync();
 
+        // Redirect to the Index page, where rooms are displayed
         return RedirectToPage("/Index");
     }
+
 }
