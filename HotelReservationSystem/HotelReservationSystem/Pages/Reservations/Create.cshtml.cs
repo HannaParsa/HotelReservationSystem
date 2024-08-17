@@ -61,7 +61,6 @@ namespace HotelReservationSystem.Pages.Reservations
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    // ایجاد رزرو
                     var reservation = new Reservation
                     {
                         UserId = user.UserId
@@ -79,7 +78,6 @@ namespace HotelReservationSystem.Pages.Reservations
                 }
             }
 
-            // اگر به اینجا رسید، یعنی ثبت‌نام ناموفق بوده و باید فرم را مجدداً نمایش دهد
             return Page();
         }
     }

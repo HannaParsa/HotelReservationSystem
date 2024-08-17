@@ -31,7 +31,7 @@ namespace HotelReservationSystem.Pages.Account
 
         public async Task<IActionResult> OnPostAddReviewAsync(int roomId, int rating, string comment)
         {
-            var userId = HttpContext.Session.GetString("Username"); // Assuming session holds the Username
+            var userId = HttpContext.Session.GetString("Username");
 
             if (userId == null)
             {

@@ -32,19 +32,14 @@
                 @foreach (var room in Model.Rooms)
                 {
                     <div class="room-item">
-                        <!-- Display the room number -->
                         <h3>@room.RoomNumber</h3>
 
-                        <!-- Display the room image -->
                         <img src="@room.ImageURL" alt="Image of @room.RoomNumber" class="room-image" />
 
-                        <!-- Display the room description -->
                         <p>@room.Description</p>
 
-                        <!-- Display the room price -->
                         <p class="room-price">Price: $@room.Price</p>
-
-                        <!-- Optionally, display availability status -->
+ 
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
                     </div>
                 }
