@@ -27,20 +27,49 @@
                 @foreach (var room in Model.Rooms)
                 {
                     <div class="room-item">
-                        <!-- Display the room number -->
                         <h3>@room.RoomNumber</h3>
-
-                        <!-- Display the room image -->
                         <img src="@room.ImageURL" alt="Image of @room.RoomNumber" class="room-image" />
-
-                        <!-- Display the room description -->
                         <p>@room.Description</p>
-
-                        <!-- Display the room price -->
                         <p class="room-price">Price: $@room.Price</p>
-
-                        <!-- Optionally, display availability status -->
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
+
+                        <!-- Display comments -->
+                        <h4>Reviews:</h4>
+                        @if (room.Reviews != null && room.Reviews.Any())
+                        {
+                            <ul class="list-unstyled">
+                                @foreach (var review in room.Reviews)
+                                {
+                                    <li> 
+                                        <span class="badge badge-info">@review.Rating / 5</span><br />
+                                        @review.Comment
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>No reviews yet. Be the first to review!</p>
+                        }
+
+                        <!-- Add a new comment -->
+                        <h4>Add a Review:</h4>
+                        <form method="post" asp-page-handler="AddReview" asp-route-roomId="@room.RoomId">
+                            <div class="form-group">
+                                <label for="rating">Rating:</label>
+                                <select id="rating" name="Rating" class="form-control">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Comment:</label>
+                                <textarea id="comment" name="Comment" class="form-control"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </form>
                     </div>
                 }
             </div>

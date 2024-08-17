@@ -9,6 +9,5 @@
         public Room Room { get; set; } // Navigation property
         public int Rating { get; set; } // Rating out of 5
         public string Comment { get; set; }
-        public DateTime Date { get; set; }
     }
 }

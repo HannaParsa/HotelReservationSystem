@@ -9,5 +9,6 @@
         public bool IsAvailable { get; set; } // Indicates if the room is currently available
         public string Description { get; set; }
         public string ImageURL { get; set; }
+        public ICollection<Review> Reviews { get; set; } // Navigation property
     }
 }
