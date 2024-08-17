@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Add Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body>
     <header>
@@ -33,14 +35,14 @@
                         <p class="room-price">Price: $@room.Price</p>
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
 
-                        <!-- Display comments -->
+                        <!-- Display reviews -->
                         <h4>Reviews:</h4>
                         @if (room.Reviews != null && room.Reviews.Any())
                         {
                             <ul class="list-unstyled">
                                 @foreach (var review in room.Reviews)
                                 {
-                                    <li> 
+                                    <li>
                                         <span class="badge badge-info">@review.Rating / 5</span><br />
                                         @review.Comment
                                     </li>
@@ -52,24 +54,42 @@
                             <p>No reviews yet. Be the first to review!</p>
                         }
 
-                        <!-- Add a new comment -->
-                        <h4>Add a Review:</h4>
-                        <form method="post" asp-page-handler="AddReview" asp-route-roomId="@room.RoomId">
-                            <div class="form-group">
-                                <label for="rating">Rating:</label>
-                                <select id="rating" name="Rating" class="form-control">
-                                    @for (int i = 1; i <= 5; i++)
-                                    {
-                                        <option value="@i">@i</option>
-                                    }
-                                </select>
+                        <!-- Comment button that triggers modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal-@room.RoomId">
+                            Comment
+                        </button>
+
+                        <!-- Modal for submitting a comment -->
+                        <div class="modal fade" id="commentModal-@room.RoomId" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel-@room.RoomId" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="commentModalLabel-@room.RoomId">Add a Review for Room @room.RoomNumber</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" asp-page-handler="AddReview" asp-route-roomId="@room.RoomId">
+                                            <div class="form-group">
+                                                <label for="rating-@room.RoomId">Rating:</label>
+                                                <select id="rating-@room.RoomId" name="Rating" class="form-control">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        <option value="@i">@i</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="comment-@room.RoomId">Comment:</label>
+                                                <textarea id="comment-@room.RoomId" name="Comment" class="form-control"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="comment">Comment:</label>
-                                <textarea id="comment" name="Comment" class="form-control"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit Review</button>
-                        </form>
+                        </div>
                     </div>
                 }
             </div>
@@ -79,5 +99,10 @@
             <p>No rooms available at the moment.</p>
         }
     </main>
+
+    <!-- Add jQuery and Bootstrap JS for modal functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
