@@ -1,31 +1,54 @@
-﻿
-
+﻿@page
 @model HotelReservationSystem.Pages.Account.LoginModel
-
 @{
     ViewData["Title"] = "Login";
 }
 
-<h2>Login</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <h1>Hotel Reservation System</h1>
+    </header>
 
-<form method="post">
-  <div class ="row">
-    <div class="form-group col-md-4">
-        <label asp-for="Input.Email"></label>
-        <input asp-for="Input.Email" class="form-control" />
-        <span asp-validation-for="Input.Email" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-4">
-        <label asp-for="Input.Password"></label>
-        <input asp-for="Input.Password" type="password" class="form-control" />
-        <span asp-validation-for="Input.Password" class="text-danger"></span>
-    </div>
-    <div class="col-md-4" style="margin-top: 25px;">
-        <button type="submit" class="btn btn-primary">Login</button>
-    </div>
-  </div>
-</form>
+    <main role="main" class="container">
+        <h2>Login</h2>
 
-<div>
-    <a asp-page="/Account/Register">Register as a new user</a>
-</div>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Input.Username">Username</label>
+                <input asp-for="Input.Username" class="form-control" />
+                <span asp-validation-for="Input.Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Password">Password</label>
+                <input asp-for="Input.Password" type="password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <input asp-for="Input.RememberMe" type="checkbox" class="form-check-input" />
+                <label asp-for="Input.RememberMe" class="form-check-label">Remember me</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        <div class="mt-3">
+            <p>
+                <a asp-page="./ForgotPassword">Forgot your password?</a>
+            </p>
+            <p>
+                If you are a new user, please <a asp-page="/Account/Register">register here</a>.
+            </p>
+        </div>
+    </main>
+</body>
+</html>
