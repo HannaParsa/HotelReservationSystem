@@ -1,17 +1,28 @@
 using HotelReservationSystem.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 public class RegisterModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
 
     [BindProperty]
     public User User { get; set; }
 
-    public RegisterModel(ApplicationDbContext context)
+    [BindProperty]
+    [Required(ErrorMessage = "Password is required.")]
+    [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+    [DataType(DataType.Password)]
+    [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$", ErrorMessage = "The password must contain at least one uppercase letter, one lowercase letter, and one digit.")]
+    public string Password { get; set; }
+
+    public RegisterModel(UserManager<User> userManager, SignInManager<User> signInManager)
     {
-        _context = context;
+        _userManager = userManager;
+        _signInManager = signInManager;
     }
 
     public void OnGet()
@@ -19,18 +30,28 @@ public class RegisterModel : PageModel
     }
 
     public async Task<IActionResult> OnPostAsync()
-    {
-        if (!ModelState.IsValid)
+    {        
+
+        // Set the default role to "Guest"
+        User.Role = "Guest";
+
+        // Create the user with the UserManager
+        var result = await _userManager.CreateAsync(User, Password);
+
+        if (result.Succeeded)
         {
-            return Page();
+            await _userManager.AddToRoleAsync(User, "Guest");
+            await _signInManager.SignInAsync(User, isPersistent: false);
+
+            return RedirectToPage("/Index");
         }
 
-        // Add the new user to the database
-        _context.Users.Add(User);
-        await _context.SaveChangesAsync();
+        // If there were errors, add them to the ModelState
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.Description);
+        }
 
-        // Redirect to the Index page, where rooms are displayed
-        return RedirectToPage("/Index");
+        return Page();
     }
-
 }

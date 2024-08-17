@@ -5,6 +5,7 @@ using HotelReservationSystem.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using HotelReservationSystem.Data;
 
 namespace HotelReservationSystem.Pages.Reservations
 {

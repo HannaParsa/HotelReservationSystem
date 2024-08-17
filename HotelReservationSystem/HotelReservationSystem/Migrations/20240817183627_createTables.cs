@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HotelReservationSystem.Migrations
 {
-    public partial class userChange : Migration
+    public partial class createTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,6 +38,20 @@ namespace HotelReservationSystem.Migrations
                 table: "Reviews",
                 type: "nvarchar(450)",
                 nullable: true);
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "CheckInDate",
+                table: "Reservations",
+                type: "datetime2",
+                nullable: false,
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "CheckOutDate",
+                table: "Reservations",
+                type: "datetime2",
+                nullable: false,
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<string>(
                 name: "UserId1",
@@ -396,6 +410,14 @@ namespace HotelReservationSystem.Migrations
             migrationBuilder.DropColumn(
                 name: "UserId1",
                 table: "Reviews");
+
+            migrationBuilder.DropColumn(
+                name: "CheckInDate",
+                table: "Reservations");
+
+            migrationBuilder.DropColumn(
+                name: "CheckOutDate",
+                table: "Reservations");
 
             migrationBuilder.DropColumn(
                 name: "UserId1",

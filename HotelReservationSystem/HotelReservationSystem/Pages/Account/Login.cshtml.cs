@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
 using HotelReservationSystem.Models;
 using System.Threading.Tasks;
+using HotelReservationSystem.Data;
 
 namespace HotelReservationSystem.Pages.Account
 {
