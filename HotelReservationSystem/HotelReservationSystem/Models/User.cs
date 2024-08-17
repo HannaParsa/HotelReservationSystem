@@ -2,7 +2,7 @@
 
 namespace HotelReservationSystem.Models
 {
-    public class User: IdentityUser
+    public class User : IdentityUser
     {
         public int UserId { get; set; }
         public string Username { get; set; }
