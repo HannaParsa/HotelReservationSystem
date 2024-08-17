@@ -1,35 +1,47 @@
 ﻿@page
 @model HotelReservationSystem.Pages.Reservations.CreateModel
+
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Create Reservation";
 }
 
-<h1>Register</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <h1>Create Reservation</h1>
+    </header>
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Input.Email"></label>
-        <input asp-for="Input.Email" class="form-control" />
-        <span asp-validation-for="Input.Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Input.Password"></label>
-        <input asp-for="Input.Password" class="form-control" />
-        <span asp-validation-for="Input.Password" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Input.ConfirmPassword"></label>
-        <input asp-for="Input.ConfirmPassword" class="form-control" />
-        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Input.RoomId"></label>
-        <input asp-for="Input.RoomId" class="form-control" />
-        <span asp-validation-for="Input.RoomId" class="text-danger"></span>
-    </div>    
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+    <main role="main" class="container">
+        <h2>Reserve Room @Model.Room.RoomNumber</h2>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        <form method="post">
+            <div class="form-group">
+                <label for="userId">User ID:</label>
+                <input type="text" id="userId" name="UserId" class="form-control" value="@Model.UserId" readonly />
+            </div>
+            <div class="form-group">
+                <label for="totalAmount">Total Amount:</label>
+                <input type="number" id="totalAmount" name="TotalAmount" class="form-control" value="@Model.Room.Price" readonly />
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="RoomId" value="@Model.Room.RoomId" />
+                <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+            </div>
+        </form>
+
+        <a href="/Account/Index" class="btn btn-secondary">Back to Room List</a>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

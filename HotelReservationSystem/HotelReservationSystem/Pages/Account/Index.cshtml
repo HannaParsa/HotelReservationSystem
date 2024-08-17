@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Add Bootstrap CSS for styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body>
@@ -34,10 +35,17 @@
                         <p class="room-price">Price: $@room.Price</p>
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
+                        <!-- Show Comments button that triggers modal -->
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
                             Show Comments
                         </button>
 
+                        <!-- Reserve Room button -->
+                        <a href="/Reservations/Create?roomId=@room.RoomId" class="btn btn-success">
+                            Reserve Room
+                        </a>
+
+                        <!-- Modal for displaying comments and ratings -->
                         <div class="modal fade" id="commentsModal-@room.RoomId" tabindex="-1" role="dialog" aria-labelledby="commentsModalLabel-@room.RoomId" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -70,10 +78,12 @@
                             </div>
                         </div>
 
+                        <!-- Comment button that triggers modal for adding a review -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal-@room.RoomId">
-                            Add Comment
+                            Add Review
                         </button>
 
+                        <!-- Modal for submitting a review -->
                         <div class="modal fade" id="commentModal-@room.RoomId" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel-@room.RoomId" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -113,6 +123,8 @@
             <p>No rooms available at the moment.</p>
         }
     </main>
+
+    <!-- Add jQuery and Bootstrap JS for modal functionality -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
