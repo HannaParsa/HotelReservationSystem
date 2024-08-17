@@ -35,31 +35,50 @@
                         <p class="room-price">Price: $@room.Price</p>
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
 
-                        <!-- Display reviews -->
-                        <h4>Reviews:</h4>
-                        @if (room.Reviews != null && room.Reviews.Any())
-                        {
-                            <ul class="list-unstyled">
-                                @foreach (var review in room.Reviews)
-                                {
-                                    <li>
-                                        <span class="badge badge-info">@review.Rating / 5</span><br />
-                                        @review.Comment
-                                    </li>
-                                }
-                            </ul>
-                        }
-                        else
-                        {
-                            <p>No reviews yet. Be the first to review!</p>
-                        }
-
-                        <!-- Comment button that triggers modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal-@room.RoomId">
-                            Comment
+                        <!-- Show Comments button that triggers modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
+                            Show Comments
                         </button>
 
-                        <!-- Modal for submitting a comment -->
+                        <!-- Modal for displaying comments and ratings -->
+                        <div class="modal fade" id="commentsModal-@room.RoomId" tabindex="-1" role="dialog" aria-labelledby="commentsModalLabel-@room.RoomId" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="commentsModalLabel-@room.RoomId">Comments for Room @room.RoomNumber</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @if (room.Reviews != null && room.Reviews.Any())
+                                        {
+                                            <ul class="list-unstyled">
+                                                @foreach (var review in room.Reviews)
+                                                {
+                                                    <li>
+                                                        <span class="badge badge-info">Rating: @review.Rating / 5</span><br />
+                                                        <p>@review.Comment</p>
+                                                        <hr />
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <p>No reviews yet for this room.</p>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comment button that triggers modal for adding a review -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal-@room.RoomId">
+                            Add Comment
+                        </button>
+
+                        <!-- Modal for submitting a review -->
                         <div class="modal fade" id="commentModal-@room.RoomId" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel-@room.RoomId" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
