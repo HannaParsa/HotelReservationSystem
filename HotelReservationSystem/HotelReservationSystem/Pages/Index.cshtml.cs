@@ -1,4 +1,5 @@
-﻿using HotelReservationSystem.Data;
+﻿
+using HotelReservationSystem.Data;
 using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;

@@ -40,13 +40,9 @@ namespace HotelReservationSystem.Pages.Reservations
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            // اضافه کردن ویژگی‌های مورد نیاز برای رزرو
+            
             [Required]
-            public int RoomId { get; set; }
-            [Required]
-            public DateTime CheckInDate { get; set; }
-            [Required]
-            public DateTime CheckOutDate { get; set; }
+            public int RoomId { get; set; }           
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -55,10 +51,10 @@ namespace HotelReservationSystem.Pages.Reservations
             {
                 var user = new User
                 {
-                    UserName = Input.Email,
+                    Username = Input.Email,
                     Email = Input.Email,
                 };
-
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -68,11 +64,7 @@ namespace HotelReservationSystem.Pages.Reservations
                     // ایجاد رزرو
                     var reservation = new Reservation
                     {
-                        UserId = user.UserId,
-                        RoomId = Input.RoomId, // شناسه اتاق انتخاب‌شده
-                        ReservationDate = DateTime.Now,
-                        CheckInDate = Input.CheckInDate,
-                        CheckOutDate = Input.CheckOutDate
+                        UserId = user.UserId.ToString()
                     };
 
                     _context.Reservations.Add(reservation);

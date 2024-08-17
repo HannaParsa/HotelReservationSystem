@@ -44,8 +44,7 @@ namespace HotelReservationSystem.Pages.Rooms
                 return Page();
             }
 
-            Review.ReviewDate = DateTime.Now;
-            Review.UserId = 1;
+            Review.UserId = "1";
             _context.Reviews.Add(Review);
             await _context.SaveChangesAsync();
 

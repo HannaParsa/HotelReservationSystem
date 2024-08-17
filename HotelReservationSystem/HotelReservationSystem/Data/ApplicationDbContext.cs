@@ -1,11 +1,11 @@
 ﻿
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HotelReservationSystem.Models;
 
 namespace HotelReservationSystem.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -15,6 +15,7 @@ namespace HotelReservationSystem.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Review> Reviews { get; set; }
+
 
     }
 
