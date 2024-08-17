@@ -39,12 +39,8 @@ namespace HotelReservationSystem.Pages.Rooms
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
-            Review.UserId = "1";
+            Review.UserId = 1;
             _context.Reviews.Add(Review);
             await _context.SaveChangesAsync();
 

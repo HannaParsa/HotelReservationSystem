@@ -23,7 +23,7 @@ namespace HotelReservationSystem.Pages.Account
 
         public class InputModel
         {
-            [Required]            
+            [Required]
             public string Username { get; set; }
 
             [Required]
@@ -39,6 +39,10 @@ namespace HotelReservationSystem.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             // Check user credentials
             var user = _context.Users
@@ -49,6 +53,9 @@ namespace HotelReservationSystem.Pages.Account
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 return Page();
             }
+
+            // Store the Username in the session
+            HttpContext.Session.SetString("Username", user.Username);
 
             // Redirect to a page after successful login
             return RedirectToPage("/Account/Index");

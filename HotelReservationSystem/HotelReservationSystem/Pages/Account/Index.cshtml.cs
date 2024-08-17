@@ -32,17 +32,23 @@ namespace HotelReservationSystem.Pages.Account
         public async Task<IActionResult> OnPostAddReviewAsync(int roomId, int rating, string comment)
         {
             var userId = HttpContext.Session.GetString("Username"); // Assuming session holds the Username
+
             if (userId == null)
             {
                 return RedirectToPage("/Account/Login");
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == userId);
+            // Retrieve the user by Username or UserId
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == userId);
+
             if (user == null)
             {
+                // Handle the case where the user does not exist
                 return RedirectToPage("/Account/Login");
             }
 
+            // Retrieve the room
             var room = await _context.Rooms.FirstOrDefaultAsync(r => r.RoomId == roomId);
             if (room == null)
             {
@@ -51,16 +57,17 @@ namespace HotelReservationSystem.Pages.Account
 
             var review = new Review
             {
-                UserId = user.UserId.ToString(),
+                UserId = user.UserId,
                 RoomId = roomId,
                 Rating = rating,
-                Comment = comment
+                Comment = comment,
             };
 
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage();
+            return RedirectToPage("/Account/Index");
         }
+
     }
 }

@@ -64,7 +64,7 @@ namespace HotelReservationSystem.Pages.Reservations
                     // ایجاد رزرو
                     var reservation = new Reservation
                     {
-                        UserId = user.UserId.ToString()
+                        UserId = user.UserId
                     };
 
                     _context.Reservations.Add(reservation);
