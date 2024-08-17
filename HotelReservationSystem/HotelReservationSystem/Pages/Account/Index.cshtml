@@ -1,0 +1,54 @@
+﻿@page
+@model HotelReservationSystem.Pages.Account.IndexModel
+
+@{
+    ViewData["Title"] = "LoginHome";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <h1>Hotel Reservation System</h1>
+    </header>
+
+    <main role="main" class="container">
+        <h2>Available Rooms</h2>
+
+        @if (Model.Rooms != null && Model.Rooms.Any())
+        {
+            <div class="room-list">
+                @foreach (var room in Model.Rooms)
+                {
+                    <div class="room-item">
+                        <!-- Display the room number -->
+                        <h3>@room.RoomNumber</h3>
+
+                        <!-- Display the room image -->
+                        <img src="@room.ImageURL" alt="Image of @room.RoomNumber" class="room-image" />
+
+                        <!-- Display the room description -->
+                        <p>@room.Description</p>
+
+                        <!-- Display the room price -->
+                        <p class="room-price">Price: $@room.Price</p>
+
+                        <!-- Optionally, display availability status -->
+                        <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No rooms available at the moment.</p>
+        }
+    </main>
+</body>
+</html>

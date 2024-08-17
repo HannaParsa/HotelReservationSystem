@@ -45,31 +45,28 @@ namespace HotelReservationSystem.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             // Check if the user already exists
             var userExists = _context.Users.Any(u => u.Email == Input.Email);
             if (userExists)
             {
                 ModelState.AddModelError(string.Empty, "A user with this email already exists.");
-                return Page();
+                return RedirectToPage("/Account/Index");
             }
 
             // Create new user
             var newUser = new User
             {
                 Email = Input.Email,
-                Password = Input.Password, // Ensure this is hashed in a real application
+                Password = Input.Password,
+                Username = Input.Username,
                 Role = "Guest"
             };
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
             // Redirect to login page
-            return RedirectToPage("/Account/Login");
+            return RedirectToPage("/Account/Index");
         }
     }
 }

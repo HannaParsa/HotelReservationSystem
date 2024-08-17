@@ -40,10 +40,6 @@ namespace HotelReservationSystem.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             // Check user credentials
             var user = _context.Users
@@ -60,7 +56,7 @@ namespace HotelReservationSystem.Pages.Account
             HttpContext.Session.SetString("Role", user.Role);
 
             // Redirect to a page after successful login
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Account/Index");
         }
     }
 }
