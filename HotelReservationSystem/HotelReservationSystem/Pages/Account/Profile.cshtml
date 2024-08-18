@@ -60,6 +60,7 @@
                         <th>Room Number</th>
                         <th>Total Amount</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +70,11 @@
                             <td>@reservation.Room.RoomNumber</td>
                             <td>$@reservation.TotalAmount</td>
                             <td>@reservation.Status</td>
+                            <td>
+                                <form method="post" asp-page-handler="RemoveReservation" asp-route-id="@reservation.ReservationId">
+                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>

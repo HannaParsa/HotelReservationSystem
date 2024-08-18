@@ -39,7 +39,6 @@ namespace HotelReservationSystem.Pages.Account
                 return NotFound();
             }
 
-            // Load reservations for the user
             Reservations = await _context.Reservations
                 .Include(r => r.Room) // Include room details
                 .Where(r => r.UserId == User.UserId)
@@ -64,11 +63,9 @@ namespace HotelReservationSystem.Pages.Account
                 return NotFound();
             }
 
-            // Update user details from form
             userFromDb.Username = User.Username;
             userFromDb.Email = User.Email;
 
-            // Handle password update logic
             if (!string.IsNullOrEmpty(User.Password))
             {
                 userFromDb.Password = User.Password; // Hash the password in a real application
@@ -76,13 +73,29 @@ namespace HotelReservationSystem.Pages.Account
 
             await _context.SaveChangesAsync();
 
-            // Update the session with the new username if changed
             if (oldUsername != User.Username)
             {
                 HttpContext.Session.SetString("Username", User.Username);
             }
 
-            return RedirectToPage(); // Refresh the current page
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostRemoveReservationAsync(int id)
+        {
+            var reservation = await _context.Reservations
+                .Include(r => r.Room) // Include room details if needed
+                .FirstOrDefaultAsync(r => r.ReservationId == id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            _context.Reservations.Remove(reservation);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage();
         }
     }
 }
