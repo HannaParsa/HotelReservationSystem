@@ -22,7 +22,7 @@ namespace HotelReservationSystem.Pages.Account
 
         public async Task<IActionResult> OnGetAsync()
         {
-            // Retrieve the username from session or another authentication mechanism
+          
             var username = HttpContext.Session.GetString("Username");
             if (string.IsNullOrEmpty(username))
             {
@@ -57,13 +57,13 @@ namespace HotelReservationSystem.Pages.Account
             }
 
             // Update user details from form
-            userFromDb.Username = User.Username; // Update username
+            userFromDb.Username = User.Username;
             userFromDb.Email = User.Email;
 
             // Handle password update logic
             if (!string.IsNullOrEmpty(User.Password))
             {
-                userFromDb.Password = User.Password; // Hash the password in a real application
+                userFromDb.Password = User.Password; 
             }
 
             await _context.SaveChangesAsync();
@@ -74,7 +74,7 @@ namespace HotelReservationSystem.Pages.Account
                 HttpContext.Session.SetString("Username", User.Username);
             }
 
-            return RedirectToPage(); // Refresh the current page
+            return RedirectToPage(); 
         }
     }
 }
