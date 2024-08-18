@@ -38,7 +38,7 @@
                         <p class="room-price">Price: $@room.Price</p>
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
+                        <button type="button" class="btn btn-primary text-center ml-3" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
                             Show Comments
                         </button>
 
@@ -75,7 +75,7 @@
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal-@room.RoomId">
+                        <button type="button" class="btn btn-primary text-center ml-3" data-toggle="modal" data-target="#commentModal-@room.RoomId">
                             Add Review
                         </button>
 
@@ -109,11 +109,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="text-center mt-3">
                             <a asp-page="/Reservations/Create" asp-route-roomId="@room.RoomId" class="btn btn-success">
                                 Reserve Room
                             </a>
                         </div>
+
                     </div>
                 }
             </div>
