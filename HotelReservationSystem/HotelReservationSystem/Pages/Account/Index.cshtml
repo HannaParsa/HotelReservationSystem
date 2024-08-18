@@ -38,10 +38,7 @@
                             Show Comments
                         </button>
 
-                        <a href="/Reservations/Create?roomId=@room.RoomId" class="btn btn-success">
-                            Reserve Room
-                        </a>
-
+                        
                         <div class="modal fade" id="commentsModal-@room.RoomId" tabindex="-1" role="dialog" aria-labelledby="commentsModalLabel-@room.RoomId" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -107,6 +104,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div>
+                            <a href="/Reservations/Create?roomId=@room.RoomId" class="btn btn-success">
+                            Reserve Room
+                            </a>
                         </div>
                     </div>
                 }
