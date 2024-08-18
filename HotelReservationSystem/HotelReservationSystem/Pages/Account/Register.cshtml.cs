@@ -47,7 +47,7 @@ namespace HotelReservationSystem.Pages.Account
         {
 
             // Check if the user already exists
-            var userExists = _context.Users.Any(u => u.Email == Input.Email);
+            var userExists = _context.Users.Any(u => u.Username == Input.Username);
             if (userExists)
             {
                 ModelState.AddModelError(string.Empty, "A user with this email already exists.");
@@ -64,6 +64,8 @@ namespace HotelReservationSystem.Pages.Account
             };
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
+
+            HttpContext.Session.SetString("Username", newUser.Username);
 
             // Redirect to login page
             return RedirectToPage("/Account/Index");
