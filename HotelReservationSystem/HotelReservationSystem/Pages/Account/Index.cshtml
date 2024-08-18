@@ -21,6 +21,10 @@
 
     <main role="main" class="container">
         <h2>Available Rooms</h2>
+        <div class="text-right mb-3">
+            <a class="btn btn-info" asp-page="/Account/Profile">Account</a>
+        </div>
+
 
         @if (Model.Rooms != null && Model.Rooms.Any())
         {

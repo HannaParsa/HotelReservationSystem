@@ -1,0 +1,59 @@
+﻿@page
+@model HotelReservationSystem.Pages.Account.ProfileModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <h1>Hotel Reservation System</h1>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Account/Profile">Account</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main role="main" class="container">
+        <h2>User Profile</h2>
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="User.Username">Username</label>
+                <input asp-for="User.Username" class="form-control" />
+                <span asp-validation-for="User.Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="User.Email">Email</label>
+                <input asp-for="User.Email" class="form-control" />
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="User.Password">Password</label>
+                <input asp-for="User.Password" type="password" class="form-control" />
+                <span asp-validation-for="User.Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
