@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services
 builder.Services.AddRazorPages();
 
 // Configure Entity Framework and ApplicationDbContext
@@ -15,17 +15,17 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add session services
-builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+builder.Services.AddDistributedMemoryCache(); 
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
     options.Cookie.HttpOnly = true; // Makes the session cookie HTTP only
-    options.Cookie.IsEssential = true; // Essential for GDPR compliance
+    options.Cookie.IsEssential = true; 
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
