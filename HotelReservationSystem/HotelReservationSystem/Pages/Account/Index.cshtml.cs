@@ -31,16 +31,16 @@ namespace HotelReservationSystem.Pages.Account
 
         public async Task<IActionResult> OnPostAddReviewAsync(int roomId, int rating, string comment)
         {
-            var userId = HttpContext.Session.GetString("Username");
+            var username = HttpContext.Session.GetString("Username");
 
-            if (userId == null)
+            if (username == null)
             {
                 return RedirectToPage("/Account/Login");
             }
 
             // Retrieve the user by Username or UserId
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Username == userId);
+                .FirstOrDefaultAsync(u => u.Username == username);
 
             if (user == null)
             {

@@ -6,13 +6,20 @@
 
 <div class="container">
     <h2>Reserve Room @Model.Room.RoomNumber</h2>
-    <img src="@Model.Room.ImageURL" alt="Image of @Model.Room.RoomNumber" class="room-image" />
-    <p>@Model.Room.Description</p>
-    <p class="room-price">Price: $@Model.Room.Price</p>
-    <p>Status: @(Model.Room.IsAvailable ? "Available" : "Not Available")</p>
 
-    <form method="post" asp-page-handler="Reserve">
-        <input type="hidden" name="roomId" value="@Model.Room.RoomId" />
-        <button type="submit" class="btn btn-success">Reserve the Room</button>
-    </form>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Model.Room.ImageURL" alt="Image of @Model.Room.RoomNumber" class="img-fluid" style="max-height: 150px; object-fit: cover;" />
+        </div>
+        <div class="col-md-8">
+            <p>@Model.Room.Description</p>
+            <p class="room-price"><strong>Price: $@Model.Room.Price</strong></p>
+            <p>Status: <strong>@(Model.Room.IsAvailable ? "Available" : "Not Available")</strong></p>
+
+            <form method="post" asp-page-handler="Reserve">
+                <input type="hidden" name="roomId" value="@Model.Room.RoomId" />
+                <button type="submit" class="btn btn-success">Reserve the Room</button>
+            </form>
+        </div>
+    </div>
 </div>
