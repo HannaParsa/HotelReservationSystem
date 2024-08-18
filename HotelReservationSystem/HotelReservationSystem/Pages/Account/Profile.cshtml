@@ -50,6 +50,34 @@
 
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
+
+        <h3>Reserved Rooms</h3>
+        @if (Model.Reservations != null && Model.Reservations.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model.Reservations)
+                    {
+                        <tr>
+                            <td>@reservation.Room.RoomNumber</td>
+                            <td>$@reservation.TotalAmount</td>
+                            <td>@reservation.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No reservations found.</p>
+        }
     </main>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

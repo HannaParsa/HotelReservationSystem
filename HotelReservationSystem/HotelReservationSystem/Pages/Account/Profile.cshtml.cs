@@ -5,6 +5,7 @@ using HotelReservationSystem.Data;
 using HotelReservationSystem.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace HotelReservationSystem.Pages.Account
 {
@@ -20,13 +21,14 @@ namespace HotelReservationSystem.Pages.Account
         [BindProperty]
         public User User { get; set; }
 
+        public IList<Reservation> Reservations { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
-          
             var username = HttpContext.Session.GetString("Username");
             if (string.IsNullOrEmpty(username))
             {
-                return RedirectToPage("/Account/Login"); // Redirect to login if username not found in session
+                return RedirectToPage("/Account/Login");
             }
 
             User = await _context.Users
@@ -37,6 +39,12 @@ namespace HotelReservationSystem.Pages.Account
                 return NotFound();
             }
 
+            // Load reservations for the user
+            Reservations = await _context.Reservations
+                .Include(r => r.Room) // Include room details
+                .Where(r => r.UserId == User.UserId)
+                .ToListAsync();
+
             return Page();
         }
 
@@ -45,7 +53,7 @@ namespace HotelReservationSystem.Pages.Account
             var oldUsername = HttpContext.Session.GetString("Username");
             if (string.IsNullOrEmpty(oldUsername))
             {
-                return RedirectToPage("/Account/Login"); // Redirect to login if username not found in session
+                return RedirectToPage("/Account/Login");
             }
 
             var userFromDb = await _context.Users
@@ -63,7 +71,7 @@ namespace HotelReservationSystem.Pages.Account
             // Handle password update logic
             if (!string.IsNullOrEmpty(User.Password))
             {
-                userFromDb.Password = User.Password; 
+                userFromDb.Password = User.Password; // Hash the password in a real application
             }
 
             await _context.SaveChangesAsync();
@@ -74,7 +82,7 @@ namespace HotelReservationSystem.Pages.Account
                 HttpContext.Session.SetString("Username", User.Username);
             }
 
-            return RedirectToPage(); 
+            return RedirectToPage(); // Refresh the current page
         }
     }
 }
