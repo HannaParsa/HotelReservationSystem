@@ -61,7 +61,7 @@ namespace HotelReservationSystem.Pages.Reservations
             {
                 UserId = user.UserId,
                 RoomId = room.RoomId,
-                TotalAmount = room.Price,  // Or calculate based on nights, etc.
+                TotalAmount = room.Price,  
                 Status = "Confirmed"
             };
 
