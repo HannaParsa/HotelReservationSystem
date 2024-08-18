@@ -45,7 +45,7 @@ namespace HotelReservationSystem.Pages.Reservations
 
             if (user == null)
             {
-                return Unauthorized(); // Or redirect to login page
+                return Unauthorized(); 
             }
 
             // Retrieve the room
@@ -70,15 +70,8 @@ namespace HotelReservationSystem.Pages.Reservations
             await _context.SaveChangesAsync();
 
             // Redirect to a confirmation page
-            return RedirectToPage("/Account/Index");
+            return RedirectToPage("/Reservations/Confirmation", new { roomId = roomId });
         }
 
-        // Helper method to get the current user's ID - replace with your logic
-        private int GetCurrentUserId()
-        {
-            // This is a placeholder. Implement your logic to get the currently logged-in user's ID.
-            // For example, you might store the user ID in a session or retrieve it from a JWT token.
-            return int.Parse(User.Identity.Name); // Assuming User.Identity.Name contains the user ID.
-        }
     }
 }

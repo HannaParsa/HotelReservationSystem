@@ -118,3 +118,4 @@ D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\ref\HotelReservationSystem.dll
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\HotelReservationSystem.pdb
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\HotelReservationSystem.genruntimeconfig.cache
+D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\HotelReservationSystem.csproj.AssemblyReference.cache
