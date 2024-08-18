@@ -1,8 +1,7 @@
-﻿using HotelReservationSystem.Data;
-using HotelReservationSystem.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Threading.Tasks;
+using HotelReservationSystem.Models;  
+using HotelReservationSystem.Data;
 
 namespace HotelReservationSystem.Pages.Reservations
 {
@@ -10,49 +9,35 @@ namespace HotelReservationSystem.Pages.Reservations
     {
         private readonly ApplicationDbContext _context;
 
+        public Room Room { get; set; }
+
         public CreateModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
-        public Reservation Reservation { get; set; }
-
-        public Room Room { get; set; }
-        public int UserId { get; set; }
-
-        public async Task<IActionResult> OnGetAsync(int roomId)
+        public IActionResult OnGet(int? roomId)
         {
-            var userId = HttpContext.Session.GetString("Username");
-            Room = await _context.Rooms.FindAsync(roomId);
+            if (roomId == null)
+            {
+                return NotFound();
+            }
+
+            Room = _context.Rooms.FirstOrDefault(m => m.RoomId == roomId);
 
             if (Room == null)
             {
                 return NotFound();
             }
-            UserId = Int32.Parse(userId);
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int roomId, int userId, int totalAmount)
+        public IActionResult OnPostReserve(int roomId)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var reservation = new Reservation
-            {
-                UserId = userId,
-                RoomId = roomId,
-                TotalAmount = totalAmount,
-                Status = "Confirmed"
-            };
-
-            _context.Reservations.Add(reservation);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("/Account/Index");
+            // Logic to reserve the room (e.g., save reservation to the database)
+            // After reserving, you can redirect to a confirmation page or elsewhere
+            return RedirectToPage("/Reservations/Confirmation", new { roomId = roomId });
         }
     }
 }

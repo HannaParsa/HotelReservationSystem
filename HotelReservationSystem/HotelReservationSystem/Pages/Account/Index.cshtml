@@ -106,8 +106,8 @@
                             </div>
                         </div>
                         <div>
-                            <a href="/Reservations/Create?roomId=@room.RoomId" class="btn btn-success">
-                            Reserve Room
+                            <a asp-page="/Reservations/Create" asp-route-roomId="@room.RoomId" class="btn btn-success">
+                                Reserve Room
                             </a>
                         </div>
                     </div>
