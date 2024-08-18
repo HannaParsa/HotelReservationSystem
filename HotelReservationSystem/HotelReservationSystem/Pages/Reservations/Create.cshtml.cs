@@ -64,6 +64,8 @@ namespace HotelReservationSystem.Pages.Reservations
                 TotalAmount = room.Price,  
                 Status = "Confirmed"
             };
+            //make room unavailable for other reservations
+            room.IsAvailable = false;
 
             // Save the reservation to the database
             _context.Reservations.Add(reservation);

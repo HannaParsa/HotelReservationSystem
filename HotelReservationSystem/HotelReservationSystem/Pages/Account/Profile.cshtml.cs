@@ -22,6 +22,7 @@ namespace HotelReservationSystem.Pages.Account
         public User User { get; set; }
 
         public IList<Reservation> Reservations { get; set; }
+        public IList<Room> Rooms { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -84,9 +85,12 @@ namespace HotelReservationSystem.Pages.Account
         public async Task<IActionResult> OnPostRemoveReservationAsync(int id)
         {
             var reservation = await _context.Reservations
-                .Include(r => r.Room) // Include room details if needed
+                .Include(r => r.Room) 
                 .FirstOrDefaultAsync(r => r.ReservationId == id);
-
+            //make room available for reservation
+            var room = await _context.Rooms
+                .Where(x => x.RoomId == reservation.RoomId).FirstOrDefaultAsync();
+            room.IsAvailable = true;
             if (reservation == null)
             {
                 return NotFound();
