@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using HotelReservationSystem.Data;
 using HotelReservationSystem.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HotelReservationSystem.Pages.Admin
@@ -32,12 +33,23 @@ namespace HotelReservationSystem.Pages.Admin
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+
+            var userToUpdate = await _context.Users.FindAsync(User.Username);
+
+            if (userToUpdate == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(User).State = EntityState.Modified;
+            // Update properties
+            userToUpdate.Username = User.Username;
+            userToUpdate.Email = User.Email;
+            userToUpdate.Role = User.Role;
+            // Optionally handle password update separately
+            if (!string.IsNullOrEmpty(User.Password))
+            {
+                userToUpdate.Password = User.Password; // Consider hashing the password here
+            }
 
             try
             {
@@ -45,14 +57,7 @@ namespace HotelReservationSystem.Pages.Admin
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(User.UserId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("Admin/Edit");
             }
 
             return RedirectToPage("./Index");

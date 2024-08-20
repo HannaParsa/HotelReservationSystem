@@ -1,4 +1,4 @@
-﻿@page "{id}"
+﻿@page
 @model HotelReservationSystem.Pages.Admin.EditModel
 @{
     ViewData["Title"] = "Edit User";
@@ -19,8 +19,18 @@
     </div>
     <div class="form-group">
         <label asp-for="User.Role"></label>
-        <input asp-for="User.Role" class="form-control" />
+        <select asp-for="User.Role" class="form-control">
+            <option value="Admin">Admin</option>
+            <option value="Guest">Guest</option>
+        </select>
         <span asp-validation-for="User.Role" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="User.Password"></label>
+        <input asp-for="User.Password" type="password" class="form-control" />
+        <span asp-validation-for="User.Password" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
+
+<a asp-page="/Admin/Index">Back to List</a>
