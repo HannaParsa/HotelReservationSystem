@@ -19,12 +19,17 @@
     </header>
 
     <main role="main" class="container">
-        <h2>Available Rooms</h2>
+        <div class="header-container">
+            <h2>Available Rooms</h2>
 
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <p class="alert alert-info">Please <a asp-page="/Account/Login">login</a> to view more details.</p>
-        }
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="login-container">
+                    <h4>For more information, please:</h4>
+                    <a asp-page="/Account/Login" class="login-button">Login</a>
+                </div>
+            }
+        </div>
 
         @if (Model.Rooms != null && Model.Rooms.Any())
         {
@@ -39,7 +44,7 @@
                         <p>@room.Description</p>
 
                         <p class="room-price">Price: $@room.Price</p>
- 
+
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
                     </div>
                 }

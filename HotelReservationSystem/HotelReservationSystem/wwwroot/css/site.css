@@ -103,3 +103,32 @@ footer {
 .body-index {
     background-color: var(--primary-color); /* or #808080, rgb(128, 128, 128), etc. */
 }
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+}
+
+.login-text {
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.login-button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+    .login-button:hover {
+        background-color: #0056b3;
+    }
