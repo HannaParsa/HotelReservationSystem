@@ -100,3 +100,6 @@ footer {
     bottom: 0;
     width: 100%;
 }
+.body-index {
+    background-color: var(--primary-color); /* or #808080, rgb(128, 128, 128), etc. */
+}
