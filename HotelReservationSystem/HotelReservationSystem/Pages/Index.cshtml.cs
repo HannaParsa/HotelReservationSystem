@@ -21,8 +21,11 @@ namespace HotelReservationSystem.Pages
 
         public async Task OnGetAsync()
         {
-            // Fetch the list of rooms to display on the main page
-            Rooms = await _context.Rooms.ToListAsync();
+            // Fetch the list of rooms and their reviews to display on the main page
+            Rooms = await _context.Rooms
+                .Include(r => r.Reviews)
+                .ThenInclude(review => review.User)
+                .ToListAsync();
         }
     }
 }

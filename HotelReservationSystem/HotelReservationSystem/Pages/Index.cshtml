@@ -12,8 +12,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
-<body>
+<body class="body-index">
     <header>
         <h1>Hotel Reservation System</h1>
     </header>
@@ -25,7 +26,7 @@
             @if (!User.Identity.IsAuthenticated)
             {
                 <div class="login-container">
-                    <h4>For more information, please:</h4>
+                    <h4>For more information, please</h4>
                     <a asp-page="/Account/Login" class="login-button">Login</a>
                 </div>
             }
@@ -46,7 +47,8 @@
                         <p class="room-price">Price: $@room.Price</p>
 
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
-                        <button type="button" class="btn btn-primary text-center ml-3" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
+
+                        <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
                             Show Comments
                         </button>
 
@@ -91,5 +93,9 @@
             <p>No rooms available at the moment.</p>
         }
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
