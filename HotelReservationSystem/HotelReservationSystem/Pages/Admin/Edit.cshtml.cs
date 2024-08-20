@@ -34,21 +34,21 @@ namespace HotelReservationSystem.Pages.Admin
         public async Task<IActionResult> OnPostAsync()
         {
 
-            var userToUpdate = await _context.Users.FindAsync(User.Username);
+            var userToUpdate = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == User.Username);
 
             if (userToUpdate == null)
             {
                 return NotFound();
             }
 
-            // Update properties
-            userToUpdate.Username = User.Username;
+            // Update user properties
             userToUpdate.Email = User.Email;
             userToUpdate.Role = User.Role;
-            // Optionally handle password update separately
+
             if (!string.IsNullOrEmpty(User.Password))
             {
-                userToUpdate.Password = User.Password; // Consider hashing the password here
+                userToUpdate.Password = User.Password; 
             }
 
             try
@@ -63,9 +63,5 @@ namespace HotelReservationSystem.Pages.Admin
             return RedirectToPage("./Index");
         }
 
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.UserId == id);
-        }
     }
 }
