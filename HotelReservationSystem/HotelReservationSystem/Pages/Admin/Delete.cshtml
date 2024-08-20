@@ -1,0 +1,16 @@
+﻿@page "{id}"
+@model HotelReservationSystem.Pages.Admin.DeleteModel
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<h1>Delete User</h1>
+
+<form method="post">
+    <div class="form-group">
+        <p>Are you sure you want to delete this user?</p>
+        <p>Username: @Model.User.Username</p>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
