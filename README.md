@@ -7,12 +7,13 @@
 ### Admin Panel
 - **User Management**: Admins can add, delete, and edit user accounts.
 - **Role Management**: Admins can change user roles, including promoting users to admin.
+- **Romm Managment**: Admins can delete, add or edit rooms.
 ## Features
 - **User Authentication**: Secure login and registration system.
 - **Room Search**: Flexible search options for finding rooms.
 - **Reservation Management**: Easy booking and modification of reservations.
 - **Feedback System**: Comment and rate rooms to share your experience.
-- **Admin Controls**: Comprehensive tools for managing users and roles.
+- **Admin Controls**: Comprehensive tools for managing users, roles and rooms.
 ## Getting Started
 1. **Clone the Repository**: `git clone <repository-url>`
 2. **Install Dependencies**: Ensure you have the necessary packages installed and the ssms.
