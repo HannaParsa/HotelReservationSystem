@@ -68,7 +68,7 @@ namespace HotelReservationSystem.Pages.Account
                 return RedirectToPage("/Account/Login");
             }
 
-            // Retrieve the user by Username or UserId
+            // Retrieve the user
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == username);
 

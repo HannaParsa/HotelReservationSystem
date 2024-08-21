@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AH1mDBzMnjTAiT6oFGHR+YfyYwrBJMpEXCbrV8kQouM=",
+  "Hash": "7c96B0OEJi0mdZhDJOquo7vY60aD/xR5T1F05OjSXCQ=",
   "Source": "HotelReservationSystem",
   "BasePath": "_content/HotelReservationSystem",
   "Mode": "Default",
@@ -1122,12 +1122,12 @@
       "OriginalItemSpec": "wwwroot\\images\\Room1.jpg"
     },
     {
-      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images\\Room2.jpg",
+      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images2\\Room2.jpg",
       "SourceId": "HotelReservationSystem",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\",
       "BasePath": "_content/HotelReservationSystem",
-      "RelativePath": "images/Room2.jpg",
+      "RelativePath": "images2/Room2.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1136,15 +1136,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\Room2.jpg"
+      "OriginalItemSpec": "wwwroot\\images2\\Room2.jpg"
     },
     {
-      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images\\Room3.jpg",
+      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images3\\Room3.jpg",
       "SourceId": "HotelReservationSystem",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\",
       "BasePath": "_content/HotelReservationSystem",
-      "RelativePath": "images/Room3.jpg",
+      "RelativePath": "images3/Room3.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1153,15 +1153,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\Room3.jpg"
+      "OriginalItemSpec": "wwwroot\\images3\\Room3.jpg"
     },
     {
-      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images\\Room4.jpg",
+      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images4\\Room4.jpg",
       "SourceId": "HotelReservationSystem",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\",
       "BasePath": "_content/HotelReservationSystem",
-      "RelativePath": "images/Room4.jpg",
+      "RelativePath": "images4/Room4.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1170,15 +1170,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\Room4.jpg"
+      "OriginalItemSpec": "wwwroot\\images4\\Room4.jpg"
     },
     {
-      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images\\Room5.jpg",
+      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images5\\Room5.jpg",
       "SourceId": "HotelReservationSystem",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\",
       "BasePath": "_content/HotelReservationSystem",
-      "RelativePath": "images/Room5.jpg",
+      "RelativePath": "images5/Room5.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1187,15 +1187,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\Room5.jpg"
+      "OriginalItemSpec": "wwwroot\\images5\\Room5.jpg"
     },
     {
-      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images\\Room6.jpg",
+      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\images6\\Room6.jpg",
       "SourceId": "HotelReservationSystem",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\",
       "BasePath": "_content/HotelReservationSystem",
-      "RelativePath": "images/Room6.jpg",
+      "RelativePath": "images6/Room6.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1204,7 +1204,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\Room6.jpg"
+      "OriginalItemSpec": "wwwroot\\images6\\Room6.jpg"
     },
     {
       "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\js\\site.js",

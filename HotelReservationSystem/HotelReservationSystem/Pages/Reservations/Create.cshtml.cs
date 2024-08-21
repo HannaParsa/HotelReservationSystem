@@ -37,10 +37,10 @@ namespace HotelReservationSystem.Pages.Reservations
 
         public async Task<IActionResult> OnPostReserveAsync(int roomId)
         {
-            // Replace this with your method of retrieving the current user's ID
+            
             var username = HttpContext.Session.GetString("Username");
 
-            // Retrieve the user from your custom User table
+            // Retrieve the user
             var user = _context.Users.FirstOrDefault(u => u.Username == username);
 
             if (user == null)
@@ -67,7 +67,6 @@ namespace HotelReservationSystem.Pages.Reservations
             //make room unavailable for other reservations
             room.IsAvailable = false;
 
-            // Save the reservation to the database
             _context.Reservations.Add(reservation);
             await _context.SaveChangesAsync();
 

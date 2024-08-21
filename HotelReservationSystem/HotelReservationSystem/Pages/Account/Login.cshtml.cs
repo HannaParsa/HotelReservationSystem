@@ -44,7 +44,7 @@ namespace HotelReservationSystem.Pages.Account
                 return Page();
             }
 
-            // Check user credentials
+            // Check user 
             var user = _context.Users
                 .FirstOrDefault(u => u.Username == Input.Username && u.Password == Input.Password);
 

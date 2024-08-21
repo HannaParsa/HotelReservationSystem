@@ -69,7 +69,7 @@ namespace HotelReservationSystem.Pages.Account
 
             if (!string.IsNullOrEmpty(User.Password))
             {
-                userFromDb.Password = User.Password; // Hash the password in a real application
+                userFromDb.Password = User.Password; 
             }
 
             await _context.SaveChangesAsync();
