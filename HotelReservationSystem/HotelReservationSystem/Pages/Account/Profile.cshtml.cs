@@ -79,7 +79,7 @@ namespace HotelReservationSystem.Pages.Account
                 HttpContext.Session.SetString("Username", User.Username);
             }
 
-            return RedirectToPage();
+            return RedirectToPage("Index");
         }
 
         public async Task<IActionResult> OnPostRemoveReservationAsync(int id)
