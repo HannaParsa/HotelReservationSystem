@@ -1,0 +1,35 @@
+﻿@page
+@model HotelReservationSystem.Pages.Admin.CreateModel
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<h1>Create User</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="User.Username"></label>
+        <input asp-for="User.Username" class="form-control" />
+        <span asp-validation-for="User.Username" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="User.Email"></label>
+        <input asp-for="User.Email" class="form-control" />
+        <span asp-validation-for="User.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="User.Password"></label>
+        <input asp-for="User.Password" class="form-control" type="password" />
+        <span asp-validation-for="User.Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="User.Role"></label>
+        <select asp-for="User.Role" class="form-control">
+            <option value="Guest">Guest</option>
+            <option value="Admin">Admin</option>
+        </select>
+        <span asp-validation-for="User.Role" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create User</button>
+    <a asp-page="./Create" class="btn btn-secondary">Cancel</a>
+</form>
