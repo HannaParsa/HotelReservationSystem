@@ -39,8 +39,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Admin/DeleteRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRGVsZXRlUm9vbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Admin/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Admin/EditRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRWRpdFJvb20uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Admin/Index.cshtml]
@@ -49,6 +57,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Admin/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Admin/RoomsIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9vbXNJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Error.cshtml]

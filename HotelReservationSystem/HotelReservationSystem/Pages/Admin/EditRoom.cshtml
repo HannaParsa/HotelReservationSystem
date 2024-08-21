@@ -1,0 +1,43 @@
+﻿@page "{id?}"
+@model HotelReservationSystem.Pages.Admin.EditRoomModel
+@{
+    ViewData["Title"] = Model.Room.RoomId == 0 ? "Create Room" : "Edit Room";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Room.RoomNumber"></label>
+        <input asp-for="Room.RoomNumber" class="form-control" />
+        <span asp-validation-for="Room.RoomNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Room.RoomType"></label>
+        <input asp-for="Room.RoomType" class="form-control" />
+        <span asp-validation-for="Room.RoomType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Room.Price"></label>
+        <input asp-for="Room.Price" class="form-control" />
+        <span asp-validation-for="Room.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Room.IsAvailable"></label>
+        <input asp-for="Room.IsAvailable" class="form-control" />
+        <span asp-validation-for="Room.IsAvailable" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Room.Description"></label>
+        <textarea asp-for="Room.Description" class="form-control"></textarea>
+        <span asp-validation-for="Room.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Room.ImageURL"></label>
+        <input asp-for="Room.ImageURL" class="form-control" />
+        <span asp-validation-for="Room.ImageURL" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<a asp-page="Index">Back to list</a>
