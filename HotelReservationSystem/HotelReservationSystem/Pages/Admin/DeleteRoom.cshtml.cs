@@ -2,6 +2,7 @@ using HotelReservationSystem.Data;
 using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelReservationSystem.Pages.Admin.Rooms
 {
@@ -34,18 +35,20 @@ namespace HotelReservationSystem.Pages.Admin.Rooms
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (id == null)
+            var existingRoom = await _context.Rooms
+                .FirstOrDefaultAsync(r => r.RoomNumber == Room.RoomNumber);
+
+            if (existingRoom == null)
             {
                 return NotFound();
             }
 
-            Room = await _context.Rooms.FindAsync(id);
 
-            if (Room != null)
+            if (existingRoom != null)
             {
-                _context.Rooms.Remove(Room);
+                _context.Rooms.Remove(existingRoom);
                 await _context.SaveChangesAsync();
             }
 
