@@ -33,5 +33,6 @@
 ### Admin panel
 ![My Image](HotelReservationSystem/result/8.png)
 ![My Image](HotelReservationSystem/result/9.png)
+![My Image](HotelReservationSystem/result/12.png)
 ![My Image](HotelReservationSystem/result/10.png)
 ![My Image](HotelReservationSystem/result/11.png)
