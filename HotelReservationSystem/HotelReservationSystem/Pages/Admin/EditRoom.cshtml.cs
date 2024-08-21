@@ -19,15 +19,15 @@ namespace HotelReservationSystem.Pages.Admin
         [BindProperty]
         public Room Room { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string roomNumber)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (string.IsNullOrEmpty(roomNumber))
+            if (id == null)
             {
-                return NotFound();
+                Room = new Room();
+                return Page();
             }
 
-            Room = await _context.Rooms
-                .FirstOrDefaultAsync(r => r.RoomNumber == roomNumber);
+            Room = await _context.Rooms.FindAsync(id);
 
             if (Room == null)
             {
@@ -40,7 +40,6 @@ namespace HotelReservationSystem.Pages.Admin
         public async Task<IActionResult> OnPostAsync()
         {
            
-            // Find the room in the database by RoomNumber
             var existingRoom = await _context.Rooms
                 .FirstOrDefaultAsync(r => r.RoomNumber == Room.RoomNumber);
 
