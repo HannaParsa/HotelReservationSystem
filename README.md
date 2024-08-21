@@ -38,3 +38,5 @@
 ![My Image](HotelReservationSystem/result/10.png)
 ![My Image](HotelReservationSystem/result/11.png)
 ![My Image](HotelReservationSystem/result/13.png)
+![My Image](HotelReservationSystem/result/14.png)
+![My Image](HotelReservationSystem/result/15.png)
