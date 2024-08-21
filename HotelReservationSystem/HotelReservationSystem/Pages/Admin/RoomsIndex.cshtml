@@ -38,8 +38,8 @@
                 }
             </td>
             <td>
-                <a asp-page="Edit" asp-route-id="@room.RoomId" class="btn btn-sm btn-warning">Edit</a>
-                <a asp-page="Delete" asp-route-id="@room.RoomId" class="btn btn-sm btn-danger">Delete</a>
+                <a asp-page="/Admin/EditRoom" asp-route-id="@room.RoomId" class="btn btn-sm btn-warning">Edit</a>
+                <a asp-page="/Admin/DeleteRoom" asp-route-id="@room.RoomId" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
     }

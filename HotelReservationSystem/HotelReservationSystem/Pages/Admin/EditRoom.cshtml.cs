@@ -3,6 +3,7 @@ using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace HotelReservationSystem.Pages.Admin
 {
@@ -18,15 +19,15 @@ namespace HotelReservationSystem.Pages.Admin
         [BindProperty]
         public Room Room { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string roomNumber)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(roomNumber))
             {
-                Room = new Room();
-                return Page();
+                return NotFound();
             }
 
-            Room = await _context.Rooms.FindAsync(id);
+            Room = await _context.Rooms
+                .FirstOrDefaultAsync(r => r.RoomNumber == roomNumber);
 
             if (Room == null)
             {
@@ -38,23 +39,34 @@ namespace HotelReservationSystem.Pages.Admin
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+           
+            // Find the room in the database by RoomNumber
+            var existingRoom = await _context.Rooms
+                .FirstOrDefaultAsync(r => r.RoomNumber == Room.RoomNumber);
+
+            if (existingRoom == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            if (Room.RoomId == 0)
+            // Update the room details
+            existingRoom.RoomType = Room.RoomType;
+            existingRoom.Price = Room.Price;
+            existingRoom.IsAvailable = Room.IsAvailable;
+            existingRoom.Description = Room.Description;
+            existingRoom.ImageURL = Room.ImageURL;
+
+            try
             {
-                _context.Rooms.Add(Room);
+                await _context.SaveChangesAsync();
             }
-            else
+            catch (DbUpdateConcurrencyException)
             {
-                _context.Attach(Room).State = EntityState.Modified;
+                return RedirectToPage("Admin/EditRoom");
             }
 
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("Index");
+            return RedirectToPage("./RoomsIndex");
         }
+
     }
 }
