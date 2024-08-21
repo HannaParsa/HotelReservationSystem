@@ -17,7 +17,7 @@
             <th>Room Type</th>
             <th>Price</th>
             <th>Availability</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +27,16 @@
             <td>@room.RoomNumber</td>
             <td>@room.RoomType</td>
             <td>@room.Price</td>
-            <td>@room.IsAvailable ? "Available" : "Not Available"</td>
+            <td>
+                @if (room.IsAvailable)
+                {
+                    <span class="text-success">Available</span>
+                }
+                else
+                {
+                    <span class="text-danger">Not Available</span>
+                }
+            </td>
             <td>
                 <a asp-page="Edit" asp-route-id="@room.RoomId" class="btn btn-sm btn-warning">Edit</a>
                 <a asp-page="Delete" asp-route-id="@room.RoomId" class="btn btn-sm btn-danger">Delete</a>
