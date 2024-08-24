@@ -7,7 +7,7 @@
 ### Admin Panel
 - **User Management**: Admins can add, delete, and edit user accounts.
 - **Role Management**: Admins can change user roles, including promoting users to admin.
-- **Romm Managment**: Admins can delete, add or edit rooms.
+- **Rome Managment**: Admins can delete, add or edit rooms.
 ## Features
 - **User Authentication**: Secure login and registration system.
 - **Room Search**: Flexible search options for finding rooms.
