@@ -32,7 +32,6 @@
             }
         </div>
 
-        <!-- Search Form -->
         <form method="get" class="mb-4">
             <div class="form-row">
                 <div class="col-md-4">
@@ -106,11 +105,11 @@
 
             @if (!room.IsAvailable)
             {
-                <p>Reservation Period: @room.FromDate.ToString("MM/dd/yyyy") - @room.ToDate.ToString("MM/dd/yyyy")</p>
+                <p>Reserved: @room.FromDate.ToString("dd/mm/yyyy") - @room.ToDate.ToString("dd/mm/yyyy")</p>
             }
             else
             {
-                <p>not resreved </p>
+                <p>Not resreved </p>
             }
 
             <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
