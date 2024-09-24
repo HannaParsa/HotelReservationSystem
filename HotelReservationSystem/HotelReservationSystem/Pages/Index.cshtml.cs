@@ -17,23 +17,25 @@ namespace HotelReservationSystem.Pages
             _context = context;
         }
 
-        public IList<Room> Rooms { get; set; }
-
+        // Search parameters
         public int? MinPrice { get; set; }
         public int? MaxPrice { get; set; }
-        public string Status { get; set; }        
-        //public DateTime? FromDate { get; set; }
-        //public DateTime? ToDate { get; set; }
+        public string Status { get; set; }
+        public DateTime? FromDate { get; set; }  // Nullable DateTime
+        public DateTime? ToDate { get; set; }    // Nullable DateTime
 
-        public async Task OnGetAsync(int? minPrice, int? maxPrice, string status)
+        public List<Room> Rooms { get; set; }
+
+        public void OnGet(int? minPrice, int? maxPrice, string status, DateTime? fromDate, DateTime? toDate)
         {
-
             MinPrice = minPrice;
             MaxPrice = maxPrice;
             Status = status;
+            FromDate = fromDate;
+            ToDate = toDate;
+
             var query = _context.Rooms.AsQueryable();
 
-            // price filter
             if (MinPrice.HasValue)
             {
                 query = query.Where(r => r.Price >= MinPrice.Value);
@@ -44,27 +46,21 @@ namespace HotelReservationSystem.Pages
                 query = query.Where(r => r.Price <= MaxPrice.Value);
             }
 
-            // status filter
             if (!string.IsNullOrEmpty(Status))
             {
-                if (Status == "available")
-                {
-                    query = query.Where(r => r.IsAvailable);
-                }
-                else if (Status == "notavailable")
-                {
-                    query = query.Where(r => !r.IsAvailable);
-                }
+                bool isAvailable = Status == "available";
+                query = query.Where(r => r.IsAvailable == isAvailable);
             }
-            // date filter
-            //if (FromDate.HasValue)
-            //{
-            //    query = query.Where(r => r.FromDate >= FromDate.Value);
-            //}
-            //if (ToDate.HasValue)
-            //{
-            //    query = query.Where(r => r.ToDate <= ToDate.Value);
-            //}
+
+            if (FromDate.HasValue)
+            {
+                query = query.Where(r => r.FromDate >= FromDate.Value);
+            }
+
+            if (ToDate.HasValue)
+            {
+                query = query.Where(r => r.ToDate <= ToDate.Value);
+            }
 
             Rooms = query.Include(r => r.Reviews).ToList();
         }

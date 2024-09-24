@@ -69,7 +69,17 @@
                   </div>
             </div>
             <div class="form-row mt-3">
-                <div class="col-md-12">
+                <div class="col-md-4">
+                   <label for="fromDate">From Date</label>
+                   <input type="date" class="form-control" id="fromDate" name="fromDate"
+                   value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-MM-dd") : string.Empty)" />
+               </div>
+                <div class="col-md-4">
+                    <label for="toDate">To Date</label>
+                    <input type="date" class="form-control" id="toDate" name="toDate"
+                    value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-MM-dd") : string.Empty)" />
+                </div>
+                <div class="col-md-4">
                     <button type="submit" class="btn btn-primary">Search</button>
                 </div>
             </div>
@@ -86,6 +96,14 @@
                         <p>@room.Description</p>
                         <p class="room-price">Price: $@room.Price</p>
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
+                       @if (!room.IsAvailable)
+                        {
+                            <p>Reserved: @room.FromDate.ToString("dd/MM/yyyy") - @room.ToDate.ToString("dd/MM/yyyy")</p>
+                        }
+                        else
+                        {
+                            <p>Not reserved</p>
+                        }
 
                         <button type="button" class="btn btn-primary text-center ml-3" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
                             Show Comments
