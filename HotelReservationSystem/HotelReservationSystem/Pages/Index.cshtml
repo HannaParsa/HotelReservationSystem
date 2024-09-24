@@ -68,23 +68,22 @@
                      </select>
                   </div>
             </div>
-            <div class="form-row mt-3">
-                <div class="col-md-4">
-                   <label for="fromDate">From Date</label>
-                   <input type="date" class="form-control" id="fromDate" name="fromDate"
-                   value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-MM-dd") : string.Empty)" />
-               </div>
-                <div class="col-md-4">
+           <div class="form-row">
+                <div class="col-md-3">
+                    <label for="fromDate">From Date</label>
+                    <input type="date" class="form-control" id="fromDate" name="fromDate"
+                           value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-MM-dd") : string.Empty)" />
+                </div>
+                <div class="col-md-3">
                     <label for="toDate">To Date</label>
                     <input type="date" class="form-control" id="toDate" name="toDate"
-                    value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-MM-dd") : string.Empty)" />
+                           value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-MM-dd") : string.Empty)" />
                 </div>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                <div class="col-md-2 align-self-end">
+                    <button type="submit" class="btn btn-primary btn-block">Search</button>
                 </div>
             </div>
         </form>
-
         @if (Model.Rooms != null && Model.Rooms.Any())
         {
             <div class="room-list">
