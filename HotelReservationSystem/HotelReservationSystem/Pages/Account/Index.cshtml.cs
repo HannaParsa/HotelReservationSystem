@@ -22,17 +22,20 @@ namespace HotelReservationSystem.Pages.Account
         public int? MinPrice { get; set; }
         public int? MaxPrice { get; set; }
         public string Status { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
-        public async Task OnGetAsync(int? minPrice, int? maxPrice, string status)
+        public async Task OnGetAsync(int? minPrice, int? maxPrice, string status, DateTime fromDate, DateTime toDate)
         {
 
             MinPrice = minPrice;
             MaxPrice = maxPrice;
             Status = status;
+            FromDate = fromDate;
+            ToDate = toDate;
 
             var query = _context.Rooms.Include(r => r.Reviews).AsQueryable();
 
-            // price filter
             if (MinPrice.HasValue)
             {
                 query = query.Where(r => r.Price >= MinPrice.Value);
@@ -43,7 +46,6 @@ namespace HotelReservationSystem.Pages.Account
                 query = query.Where(r => r.Price <= MaxPrice.Value);
             }
 
-            // status filter
             if (!string.IsNullOrEmpty(Status))
             {
                 if (Status == "available")
@@ -54,6 +56,10 @@ namespace HotelReservationSystem.Pages.Account
                 {
                     query = query.Where(r => !r.IsAvailable);
                 }
+            }
+            if (FromDate.HasValue && ToDate.HasValue)
+            {
+                query = query.Where(r => r.IsAvailable == true || (r.FromDate <= FromDate.Value && r.ToDate >= ToDate));
             }
 
             Rooms = await query.ToListAsync();

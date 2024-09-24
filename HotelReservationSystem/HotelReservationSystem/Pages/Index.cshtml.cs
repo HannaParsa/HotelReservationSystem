@@ -44,7 +44,7 @@ namespace HotelReservationSystem.Pages
             {
                 query = query.Where(r => r.Price <= MaxPrice.Value);
             }
-
+            
             if (!string.IsNullOrEmpty(Status))
             {
                 bool isAvailable = Status == "available";
