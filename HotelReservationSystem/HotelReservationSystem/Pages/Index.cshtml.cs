@@ -17,12 +17,11 @@ namespace HotelReservationSystem.Pages
             _context = context;
         }
 
-        // Search parameters
         public int? MinPrice { get; set; }
         public int? MaxPrice { get; set; }
         public string Status { get; set; }
-        public DateTime? FromDate { get; set; }  // Nullable DateTime
-        public DateTime? ToDate { get; set; }    // Nullable DateTime
+        public DateTime? FromDate { get; set; }  
+        public DateTime? ToDate { get; set; }    
 
         public List<Room> Rooms { get; set; }
 
@@ -52,14 +51,9 @@ namespace HotelReservationSystem.Pages
                 query = query.Where(r => r.IsAvailable == isAvailable);
             }
 
-            if (FromDate.HasValue)
+            if (FromDate.HasValue && ToDate.HasValue)
             {
-                query = query.Where(r => r.FromDate >= FromDate.Value);
-            }
-
-            if (ToDate.HasValue)
-            {
-                query = query.Where(r => r.ToDate <= ToDate.Value);
+                query = query.Where(r => r.IsAvailable == true || (r.FromDate <= FromDate.Value && r.ToDate >= ToDate));
             }
 
             Rooms = query.Include(r => r.Reviews).ToList();
