@@ -21,7 +21,9 @@ namespace HotelReservationSystem.Pages
 
         public int? MinPrice { get; set; }
         public int? MaxPrice { get; set; }
-        public string Status { get; set; }
+        public string Status { get; set; }        
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
         public async Task OnGetAsync(int? minPrice, int? maxPrice, string status)
         {
@@ -55,6 +57,12 @@ namespace HotelReservationSystem.Pages
                     query = query.Where(r => !r.IsAvailable);
                 }
             }
+            // date filter
+            if (FromDate.HasValue && ToDate.HasValue)
+            {
+                query = query.Where(r => r.FromDate >= FromDate.Value && r.ToDate <= ToDate.Value);
+            }
+
 
             Rooms = await query.ToListAsync();
         }

@@ -32,6 +32,7 @@
             }
         </div>
 
+        <!-- Search Form -->
         <form method="get" class="mb-4">
             <div class="form-row">
                 <div class="col-md-4">
@@ -43,9 +44,9 @@
                     <input type="number" class="form-control" id="maxPrice" name="maxPrice" value="@Model.MaxPrice" />
                 </div>
                 <div class="col-md-4">
-                <label for="status">Status</label>
+                    <label for="status">Status</label>
                     <select class="form-control" id="status" name="status">
-                        @if (string.IsNullOrEmpty(Model.Status))
+                         @if (string.IsNullOrEmpty(Model.Status))
                         {
                             <option value="" selected>Any</option>
                         }
@@ -71,76 +72,86 @@
                         {
                             <option value="notavailable">Not Available</option>
                         }
-                     </select>
-                  </div>
+
+                    </select>
+                </div>
             </div>
+
             <div class="form-row mt-3">
-                <div class="col-md-12">
+                <div class="col-md-4">
+                    <label for="fromDate">From Date</label>
+                    <input type="date" class="form-control" id="fromDate" name="fromDate" value="@Model.FromDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4">
+                    <label for="toDate">To Date</label>
+                    <input type="date" class="form-control" id="toDate" name="toDate" value="@Model.ToDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4 align-self-end">
                     <button type="submit" class="btn btn-primary">Search</button>
                 </div>
             </div>
         </form>
 
-        @if (Model.Rooms != null && Model.Rooms.Any())
-        {
-            <div class="room-list">
-                @foreach (var room in Model.Rooms)
-                {
-                    <div class="room-item">
-                        <h3>@room.RoomNumber</h3>
+        <div class="room-list">
+    @foreach (var room in Model.Rooms)
+    {
+        <div class="room-item">
+            <h3>@room.RoomNumber</h3>
 
-                        <img src="@room.ImageURL" alt="Image of @room.RoomNumber" class="room-image" />
+            <img src="@room.ImageURL" alt="Image of @room.RoomNumber" class="room-image" />
 
-                        <p>@room.Description</p>
+            <p>@room.Description</p>
+            <p class="room-price">Price: $@room.Price</p>
+            <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
 
-                        <p class="room-price">Price: $@room.Price</p>
+            @if (!room.IsAvailable)
+            {
+                <p>Reservation Period: @room.FromDate.ToString("MM/dd/yyyy") - @room.ToDate.ToString("MM/dd/yyyy")</p>
+            }
+            else
+            {
+                <p>not resreved </p>
+            }
 
-                        <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
+            <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
+                Show Comments
+            </button>
 
-                        <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
-                            Show Comments
-                        </button>
-
-                        
-                        <div class="modal fade" id="commentsModal-@room.RoomId" tabindex="-1" role="dialog" aria-labelledby="commentsModalLabel-@room.RoomId" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="commentsModalLabel-@room.RoomId">Comments for Room @room.RoomNumber</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        @if (room.Reviews != null && room.Reviews.Any())
-                                        {
-                                            <ul class="list-unstyled">
-                                                @foreach (var review in room.Reviews)
-                                                {
-                                                    <li>
-                                                        <span class="badge badge-info">Rating: @review.Rating / 5</span><br />
-                                                        <p>@review.Comment</p>
-                                                        <hr />
-                                                    </li>
-                                                }
-                                            </ul>
-                                        }
-                                        else
-                                        {
-                                            <p>No reviews yet for this room.</p>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
+            <div class="modal fade" id="commentsModal-@room.RoomId" tabindex="-1" role="dialog" aria-labelledby="commentsModalLabel-@room.RoomId" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="commentsModalLabel-@room.RoomId">Comments for Room @room.RoomNumber</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @if (room.Reviews != null && room.Reviews.Any())
+                            {
+                                <ul class="list-unstyled">
+                                    @foreach (var review in room.Reviews)
+                                    {
+                                        <li>
+                                            <span class="badge badge-info">Rating: @review.Rating / 5</span><br />
+                                            <p>@review.Comment</p>
+                                            <hr />
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>No reviews yet for this room.</p>
+                            }
                         </div>
                     </div>
-                }
+                </div>
             </div>
-        }
-        else
-        {
-            <p>No rooms available at the moment.</p>
-        }
+        </div>
+    }
+</div>
+
     </main>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
