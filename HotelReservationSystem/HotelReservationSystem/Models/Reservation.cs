@@ -9,7 +9,5 @@
         public Room Room { get; set; } 
         public int TotalAmount { get; set; }
         public string Status { get; set; } //Confirmed, Cancelled, Completed
-        public DateTime FromDate { get; set; }//For reservation date
-        public DateTime ToDate { get; set; }
     }
 }
