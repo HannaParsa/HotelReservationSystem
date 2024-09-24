@@ -58,11 +58,14 @@ namespace HotelReservationSystem.Pages
                 }
             }
             // date filter
-            if (FromDate.HasValue && ToDate.HasValue)
+            if (FromDate.HasValue)
             {
-                query = query.Where(r => r.FromDate >= FromDate.Value && r.ToDate <= ToDate.Value);
+                query = query.Where(r => r.FromDate >= FromDate.Value);
             }
-
+            if (ToDate.HasValue)
+            {
+                query = query.Where(r => r.ToDate <= ToDate.Value);
+            }
 
             Rooms = await query.ToListAsync();
         }
