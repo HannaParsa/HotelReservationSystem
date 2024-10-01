@@ -91,6 +91,8 @@ namespace HotelReservationSystem.Pages.Account
             var room = await _context.Rooms
                 .Where(x => x.RoomId == reservation.RoomId).FirstOrDefaultAsync();
             room.IsAvailable = true;
+            room.ToDate = null;
+            room.FromDate = null;
             if (reservation == null)
             {
                 return NotFound();

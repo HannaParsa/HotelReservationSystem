@@ -8,71 +8,89 @@ using System.Threading.Tasks;
 namespace HotelReservationSystem.Pages.Reservations
 {
     public class CreateModel : PageModel
+{
+    private readonly ApplicationDbContext _context;
+
+    public Room Room { get; set; }
+
+    // Add properties for FromDate and ToDate
+    [BindProperty]
+    public DateTime? FromDate { get; set; }
+    
+    [BindProperty]
+    public DateTime? ToDate { get; set; }
+
+    public CreateModel(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public Room Room { get; set; }
-
-        public CreateModel(ApplicationDbContext context)
+    public IActionResult OnGet(int? roomId)
+    {
+        if (roomId == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        public IActionResult OnGet(int? roomId)
+        Room = _context.Rooms.FirstOrDefault(m => m.RoomId == roomId);
+
+        if (Room == null)
         {
-            if (roomId == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
 
-            Room = _context.Rooms.FirstOrDefault(m => m.RoomId == roomId);
+        return Page();
+    }
 
-            if (Room == null)
-            {
-                return NotFound();
-            }
+    public async Task<IActionResult> OnPostReserveAsync(int roomId)
+    {
+        var username = HttpContext.Session.GetString("Username");
 
+        // Retrieve the user
+        var user = _context.Users.FirstOrDefault(u => u.Username == username);
+
+        if (user == null)
+        {
+            return Unauthorized(); 
+        }
+
+        // Retrieve the room
+        var room = _context.Rooms.FirstOrDefault(m => m.RoomId == roomId);
+
+        if (room == null || !room.IsAvailable)
+        {
+            return NotFound("The selected room is not available.");
+        }
+
+        // Check if the dates are valid
+        if (FromDate == null || ToDate == null || FromDate >= ToDate)
+        {
+            ModelState.AddModelError("", "Invalid reservation dates.");
             return Page();
         }
 
-        public async Task<IActionResult> OnPostReserveAsync(int roomId)
+        // Create a new reservation
+        var reservation = new Reservation
         {
-            
-            var username = HttpContext.Session.GetString("Username");
+            UserId = user.UserId,
+            RoomId = room.RoomId,
+            TotalAmount = room.Price,
+            Status = "Confirmed",
+            FromDate = FromDate.Value,
+            ToDate = ToDate.Value
+        };
 
-            // Retrieve the user
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+        // Make room unavailable for other reservations
+        room.IsAvailable = false;
+        room.FromDate = FromDate;
+        room.ToDate = ToDate;
 
-            if (user == null)
-            {
-                return Unauthorized(); 
-            }
+        _context.Reservations.Add(reservation);
+        await _context.SaveChangesAsync();
 
-            // Retrieve the room
-            var room = _context.Rooms.FirstOrDefault(m => m.RoomId == roomId);
-
-            if (room == null || !room.IsAvailable)
-            {
-                return NotFound("The selected room is not available.");
-            }
-
-            // Create a new reservation
-            var reservation = new Reservation
-            {
-                UserId = user.UserId,
-                RoomId = room.RoomId,
-                TotalAmount = room.Price,  
-                Status = "Confirmed"
-            };
-            //make room unavailable for other reservations
-            room.IsAvailable = false;
-
-            _context.Reservations.Add(reservation);
-            await _context.SaveChangesAsync();
-
-            // Redirect to a confirmation page
-            return RedirectToPage("/Reservations/Confirmation", new { roomId = roomId });
-        }
-
+        // Redirect to a confirmation page
+        return RedirectToPage("/Reservations/Confirmation", new { roomId = roomId });
     }
+}
+
 }

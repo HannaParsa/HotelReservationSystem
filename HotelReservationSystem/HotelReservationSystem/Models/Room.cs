@@ -9,8 +9,8 @@
         public bool IsAvailable { get; set; } //if the room is currently available
         public string Description { get; set; }
         public string ImageURL { get; set; }
-        public DateTime FromDate { get; set; }//For reservation date
-        public DateTime ToDate { get; set; }
+        public DateTime? FromDate { get; set; }//For reservation date
+        public DateTime? ToDate { get; set; }
         public ICollection<Review> Reviews { get; set; }
     }
 }

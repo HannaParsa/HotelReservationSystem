@@ -1,7 +1,7 @@
-﻿@page "{roomId:int}"
+﻿@page 
 @model HotelReservationSystem.Pages.Reservations.CreateModel
 @{
-    ViewData["Title"] = "Reserve Reservation";
+    ViewData["Title"] = "Reserve Room";
 }
 
 <div class="container">
@@ -18,6 +18,19 @@
 
             <form method="post" asp-page-handler="Reserve">
                 <input type="hidden" name="roomId" value="@Model.Room.RoomId" />
+
+                <div class="form-group">
+                    <label for="fromDate">From Date:</label>
+                    <input type="date" class="form-control" id="fromDate" name="FromDate" 
+                           value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-MM-dd") : string.Empty)" required />
+                </div>
+                
+                <div class="form-group">
+                    <label for="toDate">To Date:</label>
+                    <input type="date" class="form-control" id="toDate" name="ToDate" 
+                           value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-MM-dd") : string.Empty)" required />
+                </div>
+
                 <button type="submit" class="btn btn-success">Reserve the Room</button>
             </form>
         </div>

@@ -101,7 +101,11 @@
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
                         @if (!room.IsAvailable)
                         {
-                            <p>Reserved: @room.FromDate.ToString("dd/MM/yyyy") - @room.ToDate.ToString("dd/MM/yyyy")</p>
+                            
+                           if (room.FromDate.HasValue && room.ToDate.HasValue)
+                           {
+                               <p>Reserved: @room.FromDate.Value.ToString("dd/MM/yyyy") - @room.ToDate.Value.ToString("dd/MM/yyyy")</p>
+                           }
                         }
                         else
                         {
