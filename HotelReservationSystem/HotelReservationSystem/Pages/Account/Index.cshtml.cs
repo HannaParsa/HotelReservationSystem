@@ -18,7 +18,7 @@ namespace HotelReservationSystem.Pages.Account
             _context = context;
         }
 
-        public IList<Room> Rooms { get; set; }
+        public List<Room> Rooms { get; set; }
         public int? MinPrice { get; set; }
         public int? MaxPrice { get; set; }
         public string Status { get; set; }
@@ -59,7 +59,8 @@ namespace HotelReservationSystem.Pages.Account
             }
             if (FromDate.HasValue && ToDate.HasValue)
             {
-                query = query.Where(r => r.IsAvailable == true || (r.FromDate <= FromDate.Value && r.ToDate >= ToDate));
+                query = query.Where(r => r.IsAvailable
+                 || (r.FromDate >= ToDate.Value || r.ToDate <= FromDate.Value));
             }
 
             Rooms = await query.ToListAsync();

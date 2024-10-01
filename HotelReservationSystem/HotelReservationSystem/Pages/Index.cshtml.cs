@@ -53,7 +53,8 @@ namespace HotelReservationSystem.Pages
 
             if (FromDate.HasValue && ToDate.HasValue)
             {
-                query = query.Where(r => r.IsAvailable == true || (r.FromDate <= FromDate.Value && r.ToDate >= ToDate));
+                query = query.Where(r => r.IsAvailable
+                 || (r.FromDate >= ToDate.Value || r.ToDate <= FromDate.Value));
             }
 
             Rooms = query.Include(r => r.Reviews).ToList();

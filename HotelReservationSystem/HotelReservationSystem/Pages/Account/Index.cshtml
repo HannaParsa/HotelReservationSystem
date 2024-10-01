@@ -69,20 +69,23 @@
                   </div>
             </div>
             <div class="form-row">
-                <div class="col-md-3">
-                    <label for="fromDate">From Date</label>
-                    <input type="date" class="form-control" id="fromDate" name="fromDate"
-                           value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-MM-dd") : string.Empty)" />
-                </div>
-                <div class="col-md-3">
-                    <label for="toDate">To Date</label>
-                    <input type="date" class="form-control" id="toDate" name="toDate"
-                           value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-MM-dd") : string.Empty)" />
-                </div>
-                <div class="col-md-2 align-self-end">
-                    <button type="submit" class="btn btn-primary btn-block">Search</button>
-                </div>
+            <div class="col-md-3">
+                <label for="fromDate">From Date</label>
+                <input type="date" class="form-control" id="fromDate" name="fromDate"
+                       value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-dd-MM") : string.Empty)" 
+                       onfocus="this.value=''"/>
             </div>
+            <div class="col-md-3">
+                <label for="toDate">To Date</label>
+                <input type="date" class="form-control" id="toDate" name="toDate"
+                       value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-dd-MM") : string.Empty)" 
+                       onfocus="this.value=''"/>
+            </div>
+            <div class="col-md-2 align-self-end">
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </div>
+            </div>
+
         </form>
 
         @if (Model.Rooms != null && Model.Rooms.Any())
@@ -96,6 +99,14 @@
                         <p>@room.Description</p>
                         <p class="room-price">Price: $@room.Price</p>
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
+                        @if (!room.IsAvailable)
+                        {
+                            <p>Reserved: @room.FromDate.ToString("dd/MM/yyyy") - @room.ToDate.ToString("dd/MM/yyyy")</p>
+                        }
+                        else
+                        {
+                            <p>Not reserved</p>
+                        }
 
                         <button type="button" class="btn btn-primary text-center ml-3" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
                             Show Comments
