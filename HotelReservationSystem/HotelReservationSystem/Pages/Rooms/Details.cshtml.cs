@@ -10,24 +10,16 @@ namespace HotelReservationSystem.Pages.Rooms
     {
         private readonly ApplicationDbContext _context;
 
+        public Room Room { get; set; }
+
         public DetailsModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public Room Room { get; set; }
-        public IList<Review> Reviews { get; set; }
-
-        [BindProperty]
-        public Review Review { get; set; }
-
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int roomId)
         {
-            Room = await _context.Rooms.FindAsync(id);
-            Reviews = await _context.Reviews
-                                    .Include(r => r.User)
-                                    .Where(r => r.RoomId == id)
-                                    .ToListAsync();
+            Room = await _context.Rooms.FindAsync(roomId);
 
             if (Room == null)
             {
@@ -35,16 +27,6 @@ namespace HotelReservationSystem.Pages.Rooms
             }
 
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-
-            Review.UserId = 1;
-            _context.Reviews.Add(Review);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage(new { id = Review.RoomId });
         }
     }
 }

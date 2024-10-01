@@ -13,7 +13,6 @@ namespace HotelReservationSystem.Pages.Reservations
 
     public Room Room { get; set; }
 
-    // Add properties for FromDate and ToDate
     [BindProperty]
     public DateTime? FromDate { get; set; }
     

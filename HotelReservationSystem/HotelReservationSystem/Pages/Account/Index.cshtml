@@ -25,7 +25,6 @@
             <a class="btn btn-info" asp-page="/Account/Profile">Account</a>
         </div>
 
-
         <form method="get" class="mb-4">
             <div class="form-row">
                 <div class="col-md-4">
@@ -37,7 +36,7 @@
                     <input type="number" class="form-control" id="maxPrice" name="maxPrice" value="@Model.MaxPrice" />
                 </div>
                 <div class="col-md-4">
-                <label for="status">Status</label>
+                    <label for="status">Status</label>
                     <select class="form-control" id="status" name="status">
                         @if (string.IsNullOrEmpty(Model.Status))
                         {
@@ -65,27 +64,26 @@
                         {
                             <option value="notavailable">Not Available</option>
                         }
-                     </select>
-                  </div>
+                    </select>
+                </div>
             </div>
             <div class="form-row">
-            <div class="col-md-3">
-                <label for="fromDate">From Date</label>
-                <input type="date" class="form-control" id="fromDate" name="fromDate"
-                       value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-dd-MM") : string.Empty)" 
-                       onfocus="this.value=''"/>
+                <div class="col-md-3">
+                    <label for="fromDate">From Date</label>
+                    <input type="date" class="form-control" id="fromDate" name="fromDate"
+                           value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-dd-MM") : string.Empty)" 
+                           onfocus="this.value=''"/>
+                </div>
+                <div class="col-md-3">
+                    <label for="toDate">To Date</label>
+                    <input type="date" class="form-control" id="toDate" name="toDate"
+                           value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-dd-MM") : string.Empty)" 
+                           onfocus="this.value=''"/>
+                </div>
+                <div class="col-md-2 align-self-end">
+                    <button type="submit" class="btn btn-primary btn-block">Search</button>
+                </div>
             </div>
-            <div class="col-md-3">
-                <label for="toDate">To Date</label>
-                <input type="date" class="form-control" id="toDate" name="toDate"
-                       value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-dd-MM") : string.Empty)" 
-                       onfocus="this.value=''"/>
-            </div>
-            <div class="col-md-2 align-self-end">
-                <button type="submit" class="btn btn-primary btn-block">Search</button>
-            </div>
-            </div>
-
         </form>
 
         @if (Model.Rooms != null && Model.Rooms.Any())
@@ -96,27 +94,31 @@
                     <div class="room-item">
                         <h3>@room.RoomNumber</h3>
                         <img src="@room.ImageURL" alt="Image of @room.RoomNumber" class="room-image" />
-                        <p>@room.Description</p>
                         <p class="room-price">Price: $@room.Price</p>
                         <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
+                        
                         @if (!room.IsAvailable)
                         {
-                            
-                           if (room.FromDate.HasValue && room.ToDate.HasValue)
-                           {
-                               <p>Reserved: @room.FromDate.Value.ToString("dd/MM/yyyy") - @room.ToDate.Value.ToString("dd/MM/yyyy")</p>
-                           }
+                            if (room.FromDate.HasValue && room.ToDate.HasValue)
+                            {
+                                <p>Reserved: @room.FromDate.Value.ToString("dd/MM/yyyy") - @room.ToDate.Value.ToString("dd/MM/yyyy")</p>
+                            }
                         }
                         else
                         {
                             <p>Not reserved</p>
                         }
 
+                        <div class="text-center mt-3">
+                            <a asp-page="/Rooms/Details" asp-route-roomId="@room.RoomId" class="btn btn-info">
+                                View Details
+                            </a>
+                        </div>
+
                         <button type="button" class="btn btn-primary text-center ml-3" data-toggle="modal" data-target="#commentsModal-@room.RoomId">
                             Show Comments
                         </button>
 
-                        
                         <div class="modal fade" id="commentsModal-@room.RoomId" tabindex="-1" role="dialog" aria-labelledby="commentsModalLabel-@room.RoomId" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -158,7 +160,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="commentModalLabel-@room.RoomId">Add a Review for Room @room.RoomNumber</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="true" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -183,12 +185,12 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="text-center mt-3">
                             <a asp-page="/Reservations/Create" asp-route-roomId="@room.RoomId" class="btn btn-success">
                                 Reserve Room
                             </a>
                         </div>
-
                     </div>
                 }
             </div>

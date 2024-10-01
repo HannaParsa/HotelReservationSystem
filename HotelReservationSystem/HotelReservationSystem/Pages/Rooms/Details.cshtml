@@ -1,44 +1,45 @@
-﻿@page "{id:int}"
+﻿@page 
 @model HotelReservationSystem.Pages.Rooms.DetailsModel
 @{
     ViewData["Title"] = "Room Details";
 }
 
-<h2>Room Details</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <h1>Room Details</h1>
+    </header>
 
-<div>
-    <h3>@Model.Room.RoomNumber</h3>
-    <img src="@Model.Room.ImageURL" alt="Room Image" />
-    <p>@Model.Room.Description</p>
-    <p>Price: @Model.Room.Price</p>
-    <p>Availability: @(Model.Room.IsAvailable ? "Available" : "Not Available")</p>
-</div>
+    <main role="main" class="container">
+        <h2>@Model.Room.RoomNumber</h2>
+        <img src="@Model.Room.ImageURL" alt="Image of @Model.Room.RoomNumber" class="img-fluid" />
+        <p>@Model.Room.Description</p>
+        <p>Price: $@Model.Room.Price</p>
+        <p>Status: @(Model.Room.IsAvailable ? "Available" : "Not Available")</p>
 
-<h3>Reviews</h3>
-@if (Model.Reviews.Any())
-{
-    <ul>
-        @foreach (var review in Model.Reviews)
+        @if (!Model.Room.IsAvailable)
         {
-            <li>@review.User.Username: @review.Comment (@review.Rating stars)</li>
+            if (Model.Room.FromDate.HasValue && Model.Room.ToDate.HasValue)
+            {
+                <p>Reserved: @Model.Room.FromDate.Value.ToString("dd/MM/yyyy") - @Model.Room.ToDate.Value.ToString("dd/MM/yyyy")</p>
+            }
         }
-    </ul>
-}
-else
-{
-    <p>No reviews yet.</p>
-}
+        @if (@Model.Room.IsAvailable)
+        {
+             <a asp-page="/Reservations/Create" asp-route-roomId="@Model.Room.RoomId" class="btn btn-success">Reserve this Room</a>
+        }
+    </main>
 
-<h4>Add a Review</h4>
-<form method="post">
-    <input type="hidden" asp-for="Review.RoomId" />
-    <div>
-        <label asp-for="Review.Rating"></label>
-        <input asp-for="Review.Rating" />
-    </div>
-    <div>
-        <label asp-for="Review.Comment"></label>
-        <textarea asp-for="Review.Comment"></textarea>
-    </div>
-    <button type="submit">Submit</button>
-</form>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
