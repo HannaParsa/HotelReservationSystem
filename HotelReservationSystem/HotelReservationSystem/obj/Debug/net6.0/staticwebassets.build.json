@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "i2edigDEFkAShhl3aN4W+aDLzBzY3fkUcgdqSZSWhjM=",
+  "Hash": "5tdIW+9XC4/WF61Y76CzScQ9scqHdi2BQQdsXo9pvyg=",
   "Source": "HotelReservationSystem",
   "BasePath": "_content/HotelReservationSystem",
   "Mode": "Default",
@@ -2191,6 +2191,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\pool\\pool.jpg",
+      "SourceId": "HotelReservationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Terms\\term-9\\project\\HotelReservationSystem\\HotelReservationSystem\\wwwroot\\",
+      "BasePath": "_content/HotelReservationSystem",
+      "RelativePath": "pool/pool.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\pool\\pool.jpg"
     }
   ]
 }

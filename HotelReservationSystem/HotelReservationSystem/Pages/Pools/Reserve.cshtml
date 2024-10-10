@@ -1,0 +1,20 @@
+﻿@page "{poolId:int}"
+@model HotelReservationSystem.Pages.Pools.ReserveModel
+
+@{
+    ViewData["Title"] = "Reserve Pool";
+}
+
+<h2>Reserve the Pool</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="fromDate">From Date</label>
+        <input type="date" id="fromDate" name="FromDate" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="toDate">To Date</label>
+        <input type="date" id="toDate" name="ToDate" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Reserve</button>
+</form>

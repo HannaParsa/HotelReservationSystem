@@ -75,6 +75,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Pools/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Pools/Reserve.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcUmVzZXJ2ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Terms/term-9/project/HotelReservationSystem/HotelReservationSystem/Pages/Reservations/Confirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZXJ2YXRpb25zXENvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
