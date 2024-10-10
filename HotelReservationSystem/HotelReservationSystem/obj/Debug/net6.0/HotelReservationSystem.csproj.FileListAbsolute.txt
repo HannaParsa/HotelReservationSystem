@@ -119,3 +119,9 @@ D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\HotelReservationSystem.pdb
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\HotelReservationSystem.genruntimeconfig.cache
 D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\obj\Debug\net6.0\HotelReservationSystem.csproj.AssemblyReference.cache
+D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\MailKit.dll
+D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\MimeKit.dll
+D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\System.Formats.Asn1.dll
+D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\Terms\term-9\project\HotelReservationSystem\HotelReservationSystem\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
