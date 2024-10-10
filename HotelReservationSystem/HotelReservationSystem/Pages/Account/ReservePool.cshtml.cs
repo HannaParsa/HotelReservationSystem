@@ -3,9 +3,9 @@ using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HotelReservationSystem.Pages.Pools
+namespace HotelReservationSystem.Pages.Account
 {
-    public class ReserveModel : PageModel
+    public class ReservePoolModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
@@ -15,7 +15,7 @@ namespace HotelReservationSystem.Pages.Pools
         public DateTime ToDate { get; set; }
         public Pool Pool { get; set; }
 
-        public ReserveModel(ApplicationDbContext context)
+        public ReservePoolModel(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -3,15 +3,15 @@ using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HotelReservationSystem.Pages.Pools
+namespace HotelReservationSystem.Pages.Account
 {
-    public class DetailsModel : PageModel
+    public class PoolDetailModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
         public Pool Pool { get; set; }
 
-        public DetailsModel(ApplicationDbContext context)
+        public PoolDetailModel(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -19,6 +19,7 @@ namespace HotelReservationSystem.Pages.Account
         }
 
         public List<Room> Rooms { get; set; }
+        public Pool Pool = new Pool();
         public int? MinPrice { get; set; }
         public int? MaxPrice { get; set; }
         public string Status { get; set; }
@@ -33,7 +34,7 @@ namespace HotelReservationSystem.Pages.Account
             Status = status;
             FromDate = fromDate;
             ToDate = toDate;
-
+            Pool = _context.Pools.Where(x => 1== 1).FirstOrDefault();
             var query = _context.Rooms.Include(r => r.Reviews).AsQueryable();
 
             if (MinPrice.HasValue)

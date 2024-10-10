@@ -1,0 +1,55 @@
+﻿@page
+@model HotelReservationSystem.Pages.Account.PoolDetailModel
+@{
+    ViewData["Title"] = "Pool Details";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body class="body-index">
+    <header class="mb-4">
+        <h2 class="text-center">Pool Details</h2>
+    </header>
+
+    @if (Model.Pool != null)
+    {
+        <div class="container pool-details">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <img src="@Model.Pool.ImageURL" alt="Image of Pool" class="img-fluid mb-3" />
+                    <p>Status: <strong>@(Model.Pool.IsAvailable ? "Available" : "Not Available")</strong></p>
+
+                    @if (!Model.Pool.IsAvailable && Model.Pool.FromDate.HasValue && Model.Pool.ToDate.HasValue)
+                    {
+                        <p>Reserved from <strong>@Model.Pool.FromDate.Value.ToString("dd/MM/yyyy")</strong> 
+                        to <strong>@Model.Pool.ToDate.Value.ToString("dd/MM/yyyy")</strong></p>
+                    }
+
+                    <div class="text-center mt-3">
+                        <a asp-page="/Pools/Reserve" asp-route-poolId="@Model.Pool.PoolId" class="btn btn-success">
+                            Reserve Pool
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container text-center">
+            <p class="alert alert-danger">Pool not found.</p>
+        </div>
+    }
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
