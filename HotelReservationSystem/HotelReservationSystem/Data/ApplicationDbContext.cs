@@ -15,7 +15,8 @@ namespace HotelReservationSystem.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Review> Reviews { get; set; }
-
+        public DbSet<Pool> Pools { get; set; }
+        public DbSet<ReservePool> ReservePools { get; set; }
 
     }
 
