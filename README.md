@@ -2,6 +2,7 @@
 ### This ASP.NET Razor Pages project is a comprehensive hotel reservation system that allows users to:
 - **Register & Log In**: Create an account and log in to manage reservations.
 - **Search & Reserve Rooms**: Find available rooms based on search criteria and make reservations.
+- **Resrve Pool**: Find available Pool and reserve it.
 - **Rate & Comment**: Leave feedback and rate rooms after staying.
 - **Manage Reservations**: View, edit, or cancel your reservations.
 ### Admin Panel
@@ -11,7 +12,7 @@
 ## Features
 - **User Authentication**: Secure login and registration system.
 - **Room Search**: Flexible search options for finding rooms.
-- **Reservation Management**: Easy booking and modification of reservations.
+- **Reservation Management**: Easy booking and modification of room and pool reservations.
 - **Feedback System**: Comment and rate rooms to share your experience.
 - **Admin Controls**: Comprehensive tools for managing users, roles and rooms.
 ## Getting Started
@@ -31,6 +32,7 @@
 ![My Image](HotelReservationSystem/result/5.png)
 ![My Image](HotelReservationSystem/result/6.png)
 ![My Image](HotelReservationSystem/result/7.png)
+![My Image](HotelReservationSystem/result/18.png)
 ![My Image](HotelReservationSystem/result/17.png)
 
 ### Admin panel
