@@ -76,13 +76,13 @@
                 <div class="col-md-3">
                     <label for="fromDate">From Date</label>
                     <input type="date" class="form-control" id="fromDate" name="fromDate"
-                           value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-dd-MM") : string.Empty)" 
+                           value="@(Model.FromDate.HasValue ? Model.FromDate.Value.ToString("yyyy-MM-dd") : string.Empty)" 
                            onfocus="this.value=''"/>
                 </div>
                 <div class="col-md-3">
                     <label for="toDate">To Date</label>
                     <input type="date" class="form-control" id="toDate" name="toDate"
-                           value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-dd-MM") : string.Empty)" 
+                           value="@(Model.ToDate.HasValue ? Model.ToDate.Value.ToString("yyyy-MM-dd") : string.Empty)" 
                            onfocus="this.value=''"/>
                 </div>
                 <div class="col-md-2 align-self-end">

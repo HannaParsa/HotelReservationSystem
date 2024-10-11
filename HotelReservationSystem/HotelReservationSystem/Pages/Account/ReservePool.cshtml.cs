@@ -32,24 +32,53 @@ namespace HotelReservationSystem.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(int poolId)
         {
+            var username = HttpContext.Session.GetString("Username");
             var pool = await _context.Pools.FindAsync(poolId);
-            if (pool == null || !ModelState.IsValid)
+            var user = _context.Users.Where(x => x.Username == username).FirstOrDefault();
+            if (pool == null )
             {
                 return Page();
             }
+            if(pool.IsAvailable == false)
+            {
+                if(pool.FromDate< ToDate && pool.ToDate< FromDate)
+                {
+                    var reservationAfter = new ReservePool
+                    {
+                        PoolId = pool.PoolId,
+                        FromDate = FromDate,
+                        ToDate = ToDate,
+                        UserId = user.UserId
+                    };
+                    pool.IsAvailable = false;
+                    pool.FromDate = reservationAfter.FromDate;
+                    pool.ToDate = reservationAfter.ToDate;
 
-            var reservation = new ReservePool
+                    _context.ReservePools.Add(reservationAfter);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToPage("/Account/Confirmation", new { poolId });
+                }
+                else
+                {
+                    return NotFound("The selected date pool is not available.");
+                }
+            };
+             var reservation = new ReservePool
             {
                 PoolId = pool.PoolId,
                 FromDate = FromDate,
                 ToDate = ToDate,
-                UserId = /* current user id */ 1 // Use actual logged-in user ID here
+                UserId = user.UserId
             };
+            pool.IsAvailable = false;
+            pool.FromDate = reservation.FromDate;
+            pool.ToDate = reservation.ToDate;
 
             _context.ReservePools.Add(reservation);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Pools/Details", new { poolId });
+            return RedirectToPage("/Account/Confirmation", new { poolId });
         }
     }
 
