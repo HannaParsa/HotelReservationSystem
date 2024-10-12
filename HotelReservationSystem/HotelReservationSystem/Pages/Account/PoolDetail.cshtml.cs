@@ -2,6 +2,9 @@ using HotelReservationSystem.Data;
 using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HotelReservationSystem.Pages.Account
 {
@@ -9,7 +12,8 @@ namespace HotelReservationSystem.Pages.Account
     {
         private readonly ApplicationDbContext _context;
 
-        public Pool Pool { get; set; }
+        public Pool Pool { get; set; } 
+        public List<Pool> AllPools { get; set; } 
 
         public PoolDetailModel(ApplicationDbContext context)
         {
@@ -29,6 +33,9 @@ namespace HotelReservationSystem.Pages.Account
             {
                 return NotFound();
             }
+
+            // Fetch all pools to display below the first pool
+            AllPools = await _context.Pools.ToListAsync();
 
             return Page();
         }

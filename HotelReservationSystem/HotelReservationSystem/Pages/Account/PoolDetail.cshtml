@@ -33,18 +33,56 @@
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center">
                     <img src="@Model.Pool.ImageURL" alt="Image of Pool" class="pool-image mb-3" />
-
-                    @if (!Model.Pool.IsAvailable && Model.Pool.FromDate.HasValue && Model.Pool.ToDate.HasValue)
-                    {
-                        <p>Reserved from <strong>@Model.Pool.FromDate.Value.ToString("dd/MM/yyyy")</strong> 
-                        to <strong>@Model.Pool.ToDate.Value.ToString("dd/MM/yyyy")</strong></p>
-                    }
-
                     <div class="text-center mt-3">
                         <a asp-page="/Account/ReservePool" asp-route-poolId="@Model.Pool.PoolId" class="btn btn-success">
                             Reserve Pool
                         </a>
                     </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3 class="text-center">Other Pool Reservations</h3>
+                    <table class="table table-bordered mt-3">
+                        <thead>
+                            <tr>
+                                <th>Pool</th>
+                                <th>From Date</th>
+                                <th>To Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var otherPool in Model.AllPools)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="@otherPool.ImageURL" alt="Image of Pool" class="pool-image" style="max-width: 100px;"/>
+                                    </td>
+                                    <td>
+                                        @if (otherPool.FromDate.HasValue)
+                                        {
+                                            @otherPool.FromDate.Value.ToString("dd/MM/yyyy")
+                                        }
+                                        else
+                                        {
+                                            <span>Available</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (otherPool.ToDate.HasValue)
+                                        {
+                                            @otherPool.ToDate.Value.ToString("dd/MM/yyyy")
+                                        }
+                                        else
+                                        {
+                                            <span>Available</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
