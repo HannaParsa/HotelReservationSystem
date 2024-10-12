@@ -22,6 +22,7 @@ namespace HotelReservationSystem.Pages.Account
         public User User { get; set; }
 
         public IList<Reservation> Reservations { get; set; }
+        public IList<ReservePool> PoolReservations { get; set; }  // Added pool reservations
         public IList<Room> Rooms { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -40,9 +41,15 @@ namespace HotelReservationSystem.Pages.Account
                 return NotFound();
             }
 
+            // Get user's reservations 
             Reservations = await _context.Reservations
-                .Include(r => r.Room) // Include room details
+                .Include(r => r.Room) 
                 .Where(r => r.UserId == User.UserId)
+                .ToListAsync();
+
+            // Get pool reservations 
+            PoolReservations = await _context.ReservePools
+                .Where(p => p.UserId == User.UserId)
                 .ToListAsync();
 
             return Page();
@@ -69,7 +76,7 @@ namespace HotelReservationSystem.Pages.Account
 
             if (!string.IsNullOrEmpty(User.Password))
             {
-                userFromDb.Password = User.Password; 
+                userFromDb.Password = User.Password;
             }
 
             await _context.SaveChangesAsync();
@@ -85,20 +92,40 @@ namespace HotelReservationSystem.Pages.Account
         public async Task<IActionResult> OnPostRemoveReservationAsync(int id)
         {
             var reservation = await _context.Reservations
-                .Include(r => r.Room) 
+                .Include(r => r.Room)
                 .FirstOrDefaultAsync(r => r.ReservationId == id);
-            //make room available for reservation
-            var room = await _context.Rooms
-                .Where(x => x.RoomId == reservation.RoomId).FirstOrDefaultAsync();
-            room.IsAvailable = true;
-            room.ToDate = null;
-            room.FromDate = null;
+
             if (reservation == null)
             {
                 return NotFound();
             }
 
+            // Update the room's availability
+            var room = await _context.Rooms
+                .Where(x => x.RoomId == reservation.RoomId).FirstOrDefaultAsync();
+            room.IsAvailable = true;
+            room.ToDate = null;
+            room.FromDate = null;
+
+            // Remove the reservation
             _context.Reservations.Remove(reservation);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostRemovePoolReservationAsync(int id)
+        {
+            var poolReservation = await _context.ReservePools
+                .FirstOrDefaultAsync(pr => pr.ReservePoolId == id);
+
+            if (poolReservation == null)
+            {
+                return NotFound();
+            }
+
+            // Remove the pool reservation
+            _context.ReservePools.Remove(poolReservation);
             await _context.SaveChangesAsync();
 
             return RedirectToPage();

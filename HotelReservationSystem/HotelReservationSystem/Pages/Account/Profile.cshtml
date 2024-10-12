@@ -25,7 +25,7 @@
 
     <main role="main" class="container">
         <h2>User Profile</h2>
-
+       
         <form method="post">
             <div class="form-group">
                 <label asp-for="User.Username">Username</label>
@@ -79,8 +79,37 @@
         }
         else
         {
-            <p>No reservations found.</p>
+            <p>No room reservations found.</p>
         }
+
+        <h3>Reserved Pool</h3>
+        @if (Model.PoolReservations != null && Model.PoolReservations.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var poolReservation in Model.PoolReservations)
+                    {
+                        <tr>
+                            <td>
+                                <form method="post" asp-page-handler="RemovePoolReservation" asp-route-id="@poolReservation.ReservePoolId">
+                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No pool reservations found.</p>
+        }
+
     </main>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
