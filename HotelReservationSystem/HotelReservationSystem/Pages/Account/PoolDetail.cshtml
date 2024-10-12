@@ -12,6 +12,15 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        .pool-image {
+            width: 100%; 
+            max-width: 800px; 
+            height: auto; 
+            display: block; 
+            margin: 0 auto; 
+        }
+    </style>
 </head>
 <body class="body-index">
     <header class="mb-4">
@@ -22,9 +31,8 @@
     {
         <div class="container pool-details">
             <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <img src="@Model.Pool.ImageURL" alt="Image of Pool" class="img-fluid mb-3" />
-                    <p>Status: <strong>@(Model.Pool.IsAvailable ? "Available" : "Not Available")</strong></p>
+                <div class="col-md-6 offset-md-3 text-center">
+                    <img src="@Model.Pool.ImageURL" alt="Image of Pool" class="pool-image mb-3" />
 
                     @if (!Model.Pool.IsAvailable && Model.Pool.FromDate.HasValue && Model.Pool.ToDate.HasValue)
                     {

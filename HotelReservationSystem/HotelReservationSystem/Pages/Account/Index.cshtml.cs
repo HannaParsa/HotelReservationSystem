@@ -34,7 +34,7 @@ namespace HotelReservationSystem.Pages.Account
             Status = status;
             FromDate = fromDate;
             ToDate = toDate;
-            Pool = _context.Pools.Where(x => 1== 1).FirstOrDefault();
+            Pool = _context.Pools.Where(x => x.PoolId == 2).FirstOrDefault();
             var query = _context.Rooms.Include(r => r.Reviews).AsQueryable();
 
             if (MinPrice.HasValue)
