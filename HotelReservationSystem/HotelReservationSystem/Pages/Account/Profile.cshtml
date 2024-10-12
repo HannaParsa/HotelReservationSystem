@@ -88,6 +88,8 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>FromDate</th>
+                        <th>ToDate</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -95,6 +97,8 @@
                     @foreach (var poolReservation in Model.PoolReservations)
                     {
                         <tr>
+                            <td>@poolReservation.FromDate.Value.ToString("yyyy-MM-dd")</td>
+                            <td>@poolReservation.ToDate.Value.ToString("yyyy-MM-dd")</td>
                             <td>
                                 <form method="post" asp-page-handler="RemovePoolReservation" asp-route-id="@poolReservation.ReservePoolId">
                                     <button type="submit" class="btn btn-danger">Remove</button>

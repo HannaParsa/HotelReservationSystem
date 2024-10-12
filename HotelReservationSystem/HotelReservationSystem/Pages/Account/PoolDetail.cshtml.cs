@@ -13,7 +13,7 @@ namespace HotelReservationSystem.Pages.Account
         private readonly ApplicationDbContext _context;
 
         public Pool Pool { get; set; } 
-        public List<Pool> AllPools { get; set; } 
+        public List<ReservePool> ReservePools { get; set; } 
 
         public PoolDetailModel(ApplicationDbContext context)
         {
@@ -35,7 +35,7 @@ namespace HotelReservationSystem.Pages.Account
             }
 
             // Fetch all pools to display below the first pool
-            AllPools = await _context.Pools.ToListAsync();
+            ReservePools = await _context.ReservePools.ToListAsync();
 
             return Page();
         }

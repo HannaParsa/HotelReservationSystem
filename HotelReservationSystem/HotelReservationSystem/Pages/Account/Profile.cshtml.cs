@@ -22,7 +22,7 @@ namespace HotelReservationSystem.Pages.Account
         public User User { get; set; }
 
         public IList<Reservation> Reservations { get; set; }
-        public IList<ReservePool> PoolReservations { get; set; }  // Added pool reservations
+        public IList<ReservePool> PoolReservations { get; set; }  
         public IList<Room> Rooms { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -117,7 +117,7 @@ namespace HotelReservationSystem.Pages.Account
         public async Task<IActionResult> OnPostRemovePoolReservationAsync(int id)
         {
             var poolReservation = await _context.ReservePools
-                .FirstOrDefaultAsync(pr => pr.ReservePoolId == id);
+                .FirstOrDefaultAsync(pr => pr.ReservePoolId == id);            
 
             if (poolReservation == null)
             {

@@ -53,11 +53,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var otherPool in Model.AllPools)
+                            @foreach (var otherPool in Model.ReservePools)
                             {
                                 <tr>
                                     <td>
-                                        <img src="@otherPool.ImageURL" alt="Image of Pool" class="pool-image" style="max-width: 100px;"/>
+                                        <img src="@Model.Pool.ImageURL" alt="Image of Pool" class="pool-image" style="max-width: 100px;"/>
                                     </td>
                                     <td>
                                         @if (otherPool.FromDate.HasValue)
