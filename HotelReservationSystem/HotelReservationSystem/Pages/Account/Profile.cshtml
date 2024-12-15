@@ -55,7 +55,8 @@
                 <thead>
                     <tr>
                         <th>Room Number</th>
-                        <th>Total Amount</th>
+                        <th>FromDate</th>
+                        <th>ToDate</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -65,7 +66,8 @@
                     {
                         <tr>
                             <td>@reservation.Room.RoomNumber</td>
-                            <td>$@reservation.TotalAmount</td>
+                            <td>@reservation.FromDate.Value.ToString("yyyy-MM-dd")</td>
+                            <td>@reservation.ToDate.Value.ToString("yyyy-MM-dd")</td>
                             <td>@reservation.Status</td>
                             <td>
                                 <form method="post" asp-page-handler="RemoveReservation" asp-route-id="@reservation.ReservationId">
