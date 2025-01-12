@@ -47,7 +47,7 @@ namespace HotelReservationSystem.Pages.Account
             // Check if the pool is available
             if (!IsPoolAvailable(poolId, FromDate, ToDate))
             {
-                return NotFound("The selected date range is not available.");
+                return RedirectToPage("/Errors/Error", new { ErrorMessage = "The selected Date is not available" });
             }
             var roomResrvations = _context.Reservations.Where(x => x.UserId == user.UserId).ToList();
             for(int i = 0; i < roomResrvations.Count(); i++)
@@ -57,7 +57,7 @@ namespace HotelReservationSystem.Pages.Account
                 else if((FromDate < roomResrvations[i].FromDate || ToDate > roomResrvations[i].ToDate) &&
                     i == (roomResrvations.Count()) - 1)
                 {
-                    return NotFound("The selected date range is not in your Room reservation date.");
+                    return RedirectToPage("/Errors/Error", new { ErrorMessage = "The selected date range is not in your Room reservation date." });
                 }    
             }
             var newPool = new Pool

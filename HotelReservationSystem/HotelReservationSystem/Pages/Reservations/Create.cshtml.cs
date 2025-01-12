@@ -60,7 +60,17 @@ namespace HotelReservationSystem.Pages.Reservations
     
             if (room == null || !room.IsAvailable)
             {
-                return NotFound("The selected room is not available.");
+                if (!room.IsAvailable)
+                {
+                    if ((FromDate < room.ToDate && FromDate >= room.FromDate) ||
+                    (ToDate > room.FromDate && ToDate <= room.ToDate) ||
+                    (FromDate <= room.FromDate && ToDate >= room.ToDate))
+                    {
+                        return RedirectToPage("/Errors/Error", new { ErrorMessage = "The selected room is not available during the chosen dates." });
+                    }
+                }
+                else
+                    return RedirectToPage("/Errors/Error", new { ErrorMessage = "The selected room is not available during the chosen dates." });
             }
     
             // Check if the dates are valid
