@@ -23,14 +23,22 @@
         <img src="@Model.Room.ImageURL" alt="Image of @Model.Room.RoomNumber" class="img-fluid" />
         <p>@Model.Room.Description</p>
         <p>Price: $@Model.Room.Price</p>
-        <p>Status: @(Model.Room.IsAvailable ? "Available" : "Not Available")</p>
 
-        @if (!Model.Room.IsAvailable)
+       @if (Model.Reservations.Any())
         {
-            if (Model.Room.FromDate.HasValue && Model.Room.ToDate.HasValue)
-            {
-                <p>Reserved: @Model.Room.FromDate.Value.ToString("dd/MM/yyyy") - @Model.Room.ToDate.Value.ToString("dd/MM/yyyy")</p>
-            }
+            <h4>Reservation History:</h4>
+            <ul class="list-group">
+                @foreach (var reservation in Model.Reservations)
+                {
+                    <li class="list-group-item">
+                        Reserved: @reservation.FromDate?.ToString("dd/MM/yyyy") - @reservation.ToDate?.ToString("dd/MM/yyyy")
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No previous reservations.</p>
         }
         @if (@Model.Room.IsAvailable)
         {
