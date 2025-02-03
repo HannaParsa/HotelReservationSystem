@@ -40,39 +40,6 @@
                     <label for="maxPrice">Max Price</label>
                     <input type="number" class="form-control" id="maxPrice" name="maxPrice" value="@Model.MaxPrice" />
                 </div>
-                <div class="col-md-4">
-                    <label for="status">Status</label>
-                    <select class="form-control" id="status" name="status">
-                        @if (string.IsNullOrEmpty(Model.Status))
-                        {
-                            <option value="" selected>Any</option>
-                        }
-                        else
-                        {
-                            <option value="">Any</option>
-                        }
-
-                        @if (Model.Status == "available")
-                        {
-                            <option value="available" selected>Available</option>
-                        }
-                        else
-                        {
-                            <option value="available">Available</option>
-                        }
-
-                        @if (Model.Status == "notavailable")
-                        {
-                            <option value="notavailable" selected>Not Available</option>
-                        }
-                        else
-                        {
-                            <option value="notavailable">Not Available</option>
-                        }
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
                 <div class="col-md-3">
                     <label for="fromDate">From Date</label>
                     <input type="date" class="form-control" id="fromDate" name="fromDate"
@@ -100,20 +67,6 @@
                         <h3>@room.RoomNumber</h3>
                         <img src="@room.ImageURL" alt="Image of @room.RoomNumber" class="room-image" />
                         <p class="room-price">Price: $@room.Price</p>
-                        <p>Status: @(room.IsAvailable ? "Available" : "Not Available")</p>
-                        
-                        @if (!room.IsAvailable)
-                        {
-                            if (room.FromDate.HasValue && room.ToDate.HasValue)
-                            {
-                                <p>Reserved: @room.FromDate.Value.ToString("dd/MM/yyyy") - @room.ToDate.Value.ToString("dd/MM/yyyy")</p>
-                            }
-                        }
-                        else
-                        {
-                            <p>Not reserved</p>
-                        }
-
                         <div class="text-center mt-3">
                             <a asp-page="/Rooms/Details" asp-route-roomId="@room.RoomId" class="btn btn-info">
                                 View Details
